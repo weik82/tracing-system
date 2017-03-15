@@ -1,6 +1,6 @@
 <template>
   <div>
-   other1
+    跨境电商追溯系统
   </div>
 
 </template>

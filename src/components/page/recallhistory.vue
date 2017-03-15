@@ -1,6 +1,6 @@
 <template>
   <div>
- sub
+    召回历史
   </div>
 
 </template>

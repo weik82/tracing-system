@@ -1,6 +1,6 @@
 <template>
   <div>
-   other4
+    发布召回
   </div>
 
 </template>
