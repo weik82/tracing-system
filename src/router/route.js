@@ -16,54 +16,34 @@ export default new Router({
     {
       path: '/home',
       component: resolve => require(['../components/home.vue'], resolve),
-      children:[
+      children: [
         {
           path: '',
-          redirect: 'all'
+          redirect: 'total'
         },
         {
-          path: 'all',//全国
-          component: resolve => require(['../components/all/all.vue'], resolve),
-          children:[
-            {
-              path: '',
-              redirect: 'tab1'
-            },
-            {
-              path: 'tab1',//全国
-              component: resolve => require(['../components/all/tab1.vue'], resolve),
-            },
-            {
-              path: 'tab2',//全国
-              component: resolve => require(['../components/all/tab2.vue'], resolve),
-            }
-          ]
+          path: 'total',//全网跨境电商追溯系统
+          component: resolve => require(['../components/all/all.vue'], resolve)
         },
         {
-          path: 'sub',//省
+          path: 'crossborder',//跨境电商追溯系统
           component: resolve => require(['../components/sub/sub.vue'], resolve),
-          children:[
-            {
-              path: '',
-              redirect: 's_tab1'
-            },
-            {
-              path: 's_tab1',//全国
-              component: resolve => require(['../components/sub/tab1.vue'], resolve),
-            },
-            {
-              path: 's_tab2',//全国
-              component: resolve => require(['../components/sub/tab2.vue'], resolve),
-            }
-          ]
         },
         {
-          path: 'other1',
+          path: 'fb_total',//用户反馈(全网)
           component: resolve => require(['../components/page/other1.vue'], resolve),
         },
         {
-          path: 'other2',
+          path: 'fb_crossborder',//用户反馈(跨境电商)
           component: resolve => require(['../components/page/other2.vue'], resolve),
+        },
+        {
+          path: 'releaserecall',//发布召回
+          component: resolve => require(['../components/page/other3.vue'], resolve),
+        },
+        {
+          path: 'recallhistory',//召回历史
+          component: resolve => require(['../components/page/other4.vue'], resolve),
         }
       ]
     },

@@ -1,8 +1,10 @@
 <template>
   <div>
-    sub/tab1.vue
+   other3
   </div>
+
 </template>
+
 <script>
   export default {}
 </script>
