@@ -1,3 +1,4 @@
+/*初始化 start*/
 * {
   margin: 0;
   padding: 0;
@@ -18,10 +19,18 @@ a {
   text-decoration: none;
 }
 
+/*初始化 end*/
+/*elementui 样式重置 start*/
 .is-opened .el-submenu__title:hover {
   background-color: #20AEFC !important;
 }
 
+.el-table td, .el-table th {
+  height: 36px!important;
+}
+
+/*elementui 样式重置 end*/
+/*动画 start*/
 .move-enter-active, .move-leave-active {
   transition: opacity .5s;
 }
@@ -29,3 +38,76 @@ a {
 .move-enter, .move-leave {
   opacity: 0;
 }
+
+/*动画 end*/
+/*charts tooltip*/
+.ms-outer-wrap {
+  font-size: 16px;
+}
+
+.ms-tooltip {
+  background-color: rgba(0, 46, 72, 0.88);
+  position: relative;
+}
+
+.ms-tooltip > .tip-detail {
+  line-height: 1.7;
+  border: none;
+  padding: 20px 25px 25px 0;
+}
+
+.ms-tooltip:before, .ms-tooltip:after {
+  content: '';
+  display: block;
+  position: absolute;
+  right: 0;
+  left: 0;
+  height: 10%;
+  border: solid #20c3ff;
+}
+
+.ms-tooltip:before {
+  top: 0;
+  border-width: 2px 2px 0 2px;
+}
+
+.ms-tooltip:after {
+  bottom: 0;
+  border-width: 0 2px 2px 2px;
+}
+
+.ms-tooltip > .tip-up, .ms-tooltip > .tip-down {
+  position: absolute;
+  width: 2px;
+  height: 40%;
+  right: 0;
+  background-color: #20c3ff;
+}
+
+.ms-tooltip > .tip-up {
+  top: calc(10% + 2px);
+  transform: skewX(30deg);
+  transform-origin: 0 0 0;
+}
+
+.ms-tooltip > .tip-down {
+  bottom: calc(10% + 2px);
+  transform: skewX(-30deg);
+  transform-origin: 0 100% 0;
+}
+
+.tip-detail > p.tip-role {
+  font-size: 18px;
+  padding-left: 35px;
+
+}
+
+.tip-detail > p {
+  padding-left: 40px;
+}
+
+.tip-detail > p:not(.tip-role) {
+  background: url("../image/line.png") left center /21px 4px no-repeat;
+}
+
+

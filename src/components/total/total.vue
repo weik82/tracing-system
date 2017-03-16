@@ -8,14 +8,25 @@
       <span class="ms-toggle-item" :class="{ 'is-active': isActive == 5}" @click="toggleItem(5)">扫描统计</span>
       <span class="ms-toggle-item" :class="{ 'is-active': isActive == 6}" @click="toggleItem(6)">异常预警</span>
     </div>
+    <v-overall v-if="isActive == 1"></v-overall>
+    <v-enterprise v-if="isActive == 2"></v-enterprise>
+    <v-product v-if="isActive == 3"></v-product>
   </div>
 </template>
 
 <script>
+  import vOverall from './overall.vue';
+  import vEnterprise from './enterprise.vue'
+  import vProduct from './product.vue'
   export default {
+    components: {
+      vOverall,
+      vEnterprise,
+      vProduct
+    },
     data(){
       return {
-        isActive: 1
+        isActive: 1,
       }
     },
     methods: {
@@ -24,7 +35,6 @@
       }
     },
     mounted(){
-      console.log(this.$route)
     }
   }
 </script>
@@ -32,6 +42,7 @@
   .content-wrap {
     width: 100%;
     min-height: 100%;
+    height: 100%;
   }
 
   .ms-toggle {
@@ -54,4 +65,5 @@
   .ms-toggle > .ms-toggle-item.is-active {
     background-color: #fff;
   }
+
 </style>
