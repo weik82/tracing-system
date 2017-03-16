@@ -1,10 +1,8 @@
 <template>
   <div class="ms-main">
     <div class="ms-chart">
-      <div style="width: 100%;height: 100%" id="map"></div>
-    </div>
-    <div class="ms-detail">
-      <el-select v-model="value" placeholder="请选择" style="width: 100%">
+      <el-select v-model="value" placeholder="请选择"
+                 style="width: 200px;position: absolute;right: 10px;top: 10px;z-index: 10;">
         <el-option
           v-for="item in options"
           :label="item.label"
@@ -12,14 +10,19 @@
           :key="item.value">
         </el-option>
       </el-select>
-      <div class="ms-detail-info">
-        <p class="title">全国统计</p>
-        <p>企业备案(家)</p>
-        <span>654</span>
-        <p>产品备案(个)</p>
-        <span>1323</span>
-        <p>商品累计加贴数量(件)</p>
-        <span>23244</span>
+      <div style="width: 100%;height: 100%" id="map"></div>
+    </div>
+    <div class="ms-detail">
+      <div class="ms-detail-up">
+        <p class="ms-detail-title">全网扫码统计(次)</p>
+        <p class="ms-detail-count">34252435</p>
+        <div id="scanpie" class="chart"></div>
+      </div>
+      <div class="ms-detail-down">
+        <p class="ms-detail-title" style="padding-top: 10px">全网各省扫码统计(次)</p>
+        <div class="chart" style="overflow-y: scroll">
+          <div id="scanbar" style="width: 100%;height: 150%"> </div>
+        </div>
       </div>
     </div>
   </div>
@@ -38,6 +41,7 @@
           {label: '浙江省', value: '浙江省'}
         ],
         mapChart: null,
+        pieChart:null,
         map: {
           tooltip: {
             trigger: 'item',
@@ -190,6 +194,80 @@
               zlevel: 2
             }
           ]
+        },
+        scanpie:{
+          tooltip : {
+            trigger: 'item',
+            formatter: "{a} <br/>{b} : {c} ({d}%)"
+          },
+          legend: {
+            orient: 'vertical',
+            left: 'right',
+            data: ['直接访问','邮件营销','联盟广告','视频广告','搜索引擎']
+          },
+          series : [
+            {
+              name: '访问来源',
+              type: 'pie',
+              radius : '55%',
+              center: ['50%', '60%'],
+              data:[
+                {value:335, name:'直接访问'},
+                {value:310, name:'邮件营销'},
+                {value:234, name:'联盟广告'},
+                {value:135, name:'视频广告'},
+                {value:1548, name:'搜索引擎'}
+              ],
+              itemStyle: {
+                emphasis: {
+                  shadowBlur: 10,
+                  shadowOffsetX: 0,
+                  shadowColor: 'rgba(0, 0, 0, 0.5)'
+                }
+              }
+            }
+          ]
+        },
+        scanbar:{
+          title: {
+            text: '世界人口总量',
+            subtext: '数据来自网络'
+          },
+          tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+              type: 'shadow'
+            }
+          },
+          legend: {
+            data: ['2011年', '2012年']
+          },
+          grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
+          },
+          xAxis: {
+            type: 'value',
+            boundaryGap: [0, 0.01]
+          },
+          yAxis: {
+            type: 'category',
+            data: ['巴西','印尼','美国','印度','中国','世界人口(万)']
+          },
+          series: [
+            {
+              name: '2011年',
+              type: 'bar',
+              data: [18203, 23489, 29034, 104970, 131744, 630230]
+            },
+            {
+              name: '2012年',
+              type: 'bar',
+              data: [19325, 23438, 31000, 121594, 134141, 681807]
+            }
+          ]
         }
       }
     },
@@ -197,11 +275,21 @@
       initMap(){
         this.mapChart = echarts.init(document.getElementById('map'));
         this.mapChart.setOption(this.map);
+      },
+      initPie(){
+        this.pieChart = echarts.init(document.getElementById('scanpie'));
+        this.pieChart.setOption(this.scanpie);
+      },
+      initBar(){
+        this.barChart = echarts.init(document.getElementById('scanbar'));
+        this.barChart.setOption(this.scanbar);
       }
     },
     mounted(){
       this.$nextTick(function () {
-        this.initMap()
+        this.initMap();
+        this.initPie();
+        this.initBar();
       })
     }
   }
@@ -216,34 +304,46 @@
 
   .ms-main .ms-chart {
     flex: 0 0 70%;
+    position: relative;
   }
 
   .ms-main .ms-detail {
     flex: 0 0 30%;
-    padding: 1%;
-  }
-
-  .ms-detail-info {
-    padding: 25px 40px;
-    margin-top: 50px;
-    text-align: left;
+    padding: 10px 20px;
     background-color: #fff;
-    letter-spacing: 1px;
-    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
   }
 
-  .ms-detail-info > p {
-    margin-top: 15px;
+  .ms-detail-up {
+    flex: 0 0 40%;
+    border-bottom: 1px solid #D5D5D5;
   }
 
-  .ms-detail-info > .title {
-    margin: 0;
+  .ms-detail-down {
+    flex: 0 0 60%;
+  }
+
+  .ms-detail-up, .ms-detail-down {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .ms-detail .chart {
+    flex: 1;
+  }
+
+  .ms-detail .ms-detail-title {
+    font-size: 18px;
     color: #828282;
-    font-size: 22px;
   }
 
-  .ms-detail-info > span {
-    font-size: 32px;
-    color: #21C3FC;
+  .ms-detail .ms-detail-count {
+    font-size: 28px;
+    color: #00ACFF;
+  }
+
+  .ms-detail p {
+    letter-spacing: .2em;
   }
 </style>

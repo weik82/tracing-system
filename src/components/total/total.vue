@@ -11,6 +11,8 @@
     <v-overall v-if="isActive == 1"></v-overall>
     <v-enterprise v-if="isActive == 2"></v-enterprise>
     <v-product v-if="isActive == 3"></v-product>
+    <v-inspect v-if="isActive == 4"></v-inspect>
+    <v-scan v-if="isActive == 5"></v-scan>
   </div>
 </template>
 
@@ -18,11 +20,15 @@
   import vOverall from './overall.vue';
   import vEnterprise from './enterprise.vue'
   import vProduct from './product.vue'
+  import vInspect from './inspect.vue'
+  import vScan from './scan.vue'
   export default {
     components: {
       vOverall,
       vEnterprise,
-      vProduct
+      vProduct,
+      vInspect,
+      vScan
     },
     data(){
       return {
