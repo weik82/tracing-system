@@ -9,30 +9,36 @@
           </el-input>
         </div>
       </div>
-      <el-table :data="tableData" style="width: 100%;" height="400">
-        <el-table-column
-          prop="date"
-          label="日期"
-          width="180">
-        </el-table-column>
-        <el-table-column
-          prop="name"
-          label="姓名"
-          width="180">
-        </el-table-column>
-        <el-table-column
-          prop="address"
-          label="地址">
-        </el-table-column>
-      </el-table>
-      <el-pagination
-        @current-change=""
-        :current-page="3"
-        :page-size="100"
-        layout="jumper, prev, pager, next, total"
-        :total="400" class="test1">
-      </el-pagination>
-      <el-button type="primary" @click="toToggle(1)">返回</el-button>
+      <div style="width: 100%;height: calc(100% - 120px)">
+        <el-table :data="tableData" style="width: 100%;">
+          <el-table-column
+            prop="date"
+            label="日期"
+            width="180">
+          </el-table-column>
+          <el-table-column
+            prop="name"
+            label="姓名"
+            width="180">
+          </el-table-column>
+          <el-table-column
+            prop="address"
+            label="地址">
+          </el-table-column>
+        </el-table>
+      </div>
+      <div class="ms-pagination">
+        <el-pagination
+          @current-change=""
+          :current-page="3"
+          :page-size="100"
+          layout="jumper, prev, pager, next, total"
+          :total="400" class="test1">
+        </el-pagination>
+      </div>
+      <div class="ms-pagination" style="background-color: #ffffff">
+        <el-button type="primary" @click="toToggle(1)">返回</el-button>
+      </div>
     </div>
   </div>
 </template>
@@ -111,58 +117,6 @@
   }
 </script>
 <style scoped>
-  .ms-main {
-    width: 100%;
-    height: 100%;
-    padding: 1%;
-    display: flex;
-  }
-
-  .ms-main > .ms-chart {
-    flex: 0 0 70%;
-    position: relative;
-  }
-
-  .ms-main > .ms-detail {
-    flex: 0 0 30%;
-    padding: 10px 20px;
-    background-color: #fff;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .ms-detail-up {
-    flex: 0 0 40%;
-    border-bottom: 1px solid #D5D5D5;
-  }
-
-  .ms-detail-down {
-    flex: 0 0 60%;
-  }
-
-  .ms-detail-up, .ms-detail-down {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .ms-detail .chart {
-    flex: 1;
-  }
-
-  .ms-detail .ms-detail-title {
-    font-size: 18px;
-    color: #828282;
-  }
-
-  .ms-detail .ms-detail-count {
-    font-size: 28px;
-    color: #00ACFF;
-  }
-
-  .ms-detail p {
-    letter-spacing: .2em;
-  }
-
   .content-header {
     width: 100%;
     height: 40px;
@@ -188,13 +142,13 @@
   .ms-main-enterprise {
     width: 100%;
     padding: 1%;
-    height: calc(100% - 40px);
+    height: 100%;
     overflow-y: scroll;
     overflow-x: hidden;
   }
 
   .ms-main-enterprise > .ms-table {
-    min-height: calc(100% - 200px);
+    height: 100%;
   }
 
   .ms-pagination {
@@ -202,5 +156,6 @@
     width: 100%;
     text-align: center;
     padding-top: 5px;
+    background-color: #eef1f6;
   }
 </style>
