@@ -13,6 +13,7 @@
     <v-product v-if="isActive == 3"></v-product>
     <v-inspect v-if="isActive == 4"></v-inspect>
     <v-scan v-if="isActive == 5"></v-scan>
+    <v-warning v-if="isActive == 6"></v-warning>
   </div>
 </template>
 
@@ -22,13 +23,15 @@
   import vProduct from './product.vue'
   import vInspect from './inspect.vue'
   import vScan from './scan.vue'
+  import vWarning from './warning.vue'
   export default {
     components: {
       vOverall,
       vEnterprise,
       vProduct,
       vInspect,
-      vScan
+      vScan,
+      vWarning
     },
     data(){
       return {

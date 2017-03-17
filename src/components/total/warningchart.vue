@@ -6,12 +6,12 @@
         type="daterange"
         placeholder="选择日期范围" style="width: 200px;position: absolute;right: 10px;top: 10px;z-index: 10;">
       </el-date-picker>
-      <div style="width: 100%;height: 100%" id="map"></div>
+      <div style="width: 100%;height: 100%" id="mapchart"></div>
     </div>
     <div class="ms-detail">
       <div class="ms-detail-up">
         <p class="ms-detail-title">全网扫码统计(次)</p>
-        <p class="ms-detail-count">34252435</p>
+        <p class="ms-detail-count">34252435<span style="cursor: pointer" @click="toToggle(2)">>></span></p>
         <div id="scanpie" class="chart"></div>
       </div>
       <div class="ms-detail-down">
@@ -275,8 +275,11 @@
       }
     },
     methods: {
+      toToggle(flag){
+        this.$emit('toggleItem', flag);
+      },
       initMap(){
-        this.mapChart = echarts.init(document.getElementById('map'));
+        this.mapChart = echarts.init(document.getElementById('mapchart'));
         this.mapChart.setOption(this.map);
       },
       initPie(){
@@ -300,17 +303,17 @@
 <style scoped>
   .ms-main {
     width: 100%;
-    height: calc(100% - 40px);
+    height: 100%;
     padding: 1%;
     display: flex;
   }
 
-  .ms-main .ms-chart {
+  .ms-main > .ms-chart {
     flex: 0 0 70%;
     position: relative;
   }
 
-  .ms-main .ms-detail {
+  .ms-main > .ms-detail {
     flex: 0 0 30%;
     padding: 10px 20px;
     background-color: #fff;
@@ -349,4 +352,5 @@
   .ms-detail p {
     letter-spacing: .2em;
   }
+
 </style>

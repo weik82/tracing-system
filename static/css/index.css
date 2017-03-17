@@ -26,9 +26,11 @@ a {
 }
 
 .el-table td, .el-table th {
-  height: 36px!important;
+  height: 36px !important;
 }
-
+.el-scrollbar__wrap{
+  overflow-x: hidden!important;
+}
 /*elementui 样式重置 end*/
 /*动画 start*/
 .move-enter-active, .move-leave-active {
@@ -110,4 +112,17 @@ a {
   background: url("../image/line.png") left center /21px 4px no-repeat;
 }
 
+/*webkit scroll*/
+::-webkit-scrollbar {
+  width: 6px;
+  background-color: #F5F5F5;
+}
 
+::-webkit-scrollbar-thumb {
+  background-color: #999;
+}
+
+::-webkit-scrollbar-track {
+  /*box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);*/
+  background-color: #F5F5F5;
+}
