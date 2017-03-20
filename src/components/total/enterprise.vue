@@ -1,7 +1,7 @@
 <template>
   <div class="ms-main ms-main-scroll">
     <div class="ms-up-chart content-wrap" :style="{height:(chartStatus?'50':'250')+'px'}">
-      <div class="content-header">
+      <div class="content-header" style="padding: 0">
         <span class="content-header-title">全网企业备案时间分布统计</span>
         <div class="content-header-form">
           <el-select v-model="value" placeholder="请选择" style="width: 100px;margin: 0 10px">
@@ -29,9 +29,9 @@
     </div>
     <div class="ms-table content-wrap">
       <div class="content-header">
-        <span class="content-header-title" style="padding-left: 20px">企业信息列表</span>
+        <span class="content-header-title">企业信息列表</span>
         <div class="content-header-form">
-          <el-input placeholder="请输入企业名称" v-model="input5" style="width: 240px;margin-right: 20px">
+          <el-input placeholder="请输入企业名称" v-model="input5" style="width: 240px;">
             <el-button slot="append" icon="search" @click="search">搜索</el-button>
           </el-input>
         </div>
@@ -183,4 +183,7 @@
   }
 </script>
 <style scoped>
+  .el-icon-caret-top1{
+    line-height: 30px!important;
+  }
 </style>

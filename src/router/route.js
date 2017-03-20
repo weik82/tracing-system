@@ -39,7 +39,7 @@ export default new Router({
         },
         {
           path: 'releaserecall',//发布召回
-          component: resolve => require(['../components/page/releaserecall.vue'], resolve),
+          component: resolve => require(['../components/recall/releaserecall.vue'], resolve),
         },
         {
           path: 'recallhistory',//召回历史

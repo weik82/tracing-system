@@ -2,11 +2,7 @@
   <div class="ms-main">
     <div class="ms-all-table content-wrap">
       <div class="content-header">
-        <span class="content-header-title">酒类反馈详情</span>
-        <div class="content-header-form">
-          <el-button class="el-button-1" :plain="true" :class="{'tag-active':tag==0}" type="info" @click="getDetailList(0)">全部反馈</el-button>
-          <el-button class="el-button-1" :plain="true" :class="{'tag-active':tag==1}" type="info" @click="getDetailList(1)">只看差评</el-button>
-        </div>
+        <span class="content-header-title">商品信息列表</span>
       </div>
       <div style="width: 100%;height: calc(100% - 80px)">
         <el-table :data="tableData" style="height: 100%;width: 100%" height="'100%'">
@@ -14,11 +10,14 @@
             prop="date"
             label="日期"
             width="180">
+            <template scope="scope">
+              <a @click="cellClick(scope.$index,scope.row)" href="javascript:;" style="cursor: pointer;">{{scope.row.date}}</a>
+            </template>
           </el-table-column>
           <el-table-column
             prop="name"
             label="姓名"
-            width="180">
+            width="180" style="cursor: pointer">
           </el-table-column>
           <el-table-column
             prop="address"
@@ -37,7 +36,8 @@
       </div>
     </div>
     <div class="ms-pagination" style="padding-top: 4px;">
-      <el-button type="primary" @click="toToggle('list')">返回154</el-button>
+      <el-button type="primary" @click="toToggle('form')">返回1212</el-button>
+      <el-button type="primary" @click="toToggle('submit')">下一步</el-button>
     </div>
   </div>
 </template>
@@ -46,17 +46,6 @@
   export default {
     data(){
       return {
-        tag: 0,
-        value1: '全国',
-        value2: '全网追溯系统',
-        options: [
-          {label: '全国', value: '全国'},
-          {label: '浙江省', value: '浙江省'}
-        ],
-        options1: [
-          {label: '全网追溯系统', value: '全网追溯系统'},
-          {label: '跨境电商追溯系统', value: '跨境电商追溯系统'}
-        ],
         tableData: [
           {
             date: '2016-05-02',
@@ -118,9 +107,9 @@
       toToggle(flag){
         this.$emit('toggleItem', flag);
       },
-      getDetailList(tag){
-          this.tag=tag;
-//        alert(tag)
+      cellClick(index, row){
+        console.log(index, row);
+        this.toToggle('detail');
       }
     },
     mounted(){
@@ -140,11 +129,4 @@
     height: calc(100% - 40px);
   }
 
-  .tag-active {
-    color: #50bfff;
-    border-color: #50bfff;
-  }
-  .el-button-1:not(.tag-active){
-    border-color: transparent;
-  }
 </style>

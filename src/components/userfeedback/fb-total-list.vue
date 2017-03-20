@@ -143,11 +143,4 @@
     height: calc(100% - 40px);
   }
 
-  .content-header > .content-header-title {
-    padding-left: 20px
-  }
-
-  .content-header > .content-header-form {
-    padding-right: 20px
-  }
 </style>
