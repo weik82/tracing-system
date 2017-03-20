@@ -1,6 +1,6 @@
 <template>
-  <div class="ms-main">
-    <div class="ms-chart">
+  <div class="ms-main ms-main-flex">
+    <div class="ms-left-chart">
       <el-date-picker
         v-model="value6"
         type="daterange"
@@ -8,7 +8,7 @@
       </el-date-picker>
       <div style="width: 100%;height: 100%" id="map"></div>
     </div>
-    <div class="ms-detail">
+    <div class="ms-right-detail ms-r-detail">
       <div class="ms-detail-up">
         <p class="ms-detail-title">全网扫码统计(次)</p>
         <p class="ms-detail-count">34252435</p>
@@ -298,55 +298,6 @@
   }
 </script>
 <style scoped>
-  .ms-main {
-    width: 100%;
-    height: calc(100% - 40px);
-    padding: 1%;
-    display: flex;
-  }
 
-  .ms-main .ms-chart {
-    flex: 0 0 70%;
-    position: relative;
-  }
 
-  .ms-main .ms-detail {
-    flex: 0 0 30%;
-    padding: 10px 20px;
-    background-color: #fff;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .ms-detail-up {
-    flex: 0 0 40%;
-    border-bottom: 1px solid #D5D5D5;
-  }
-
-  .ms-detail-down {
-    flex: 0 0 60%;
-  }
-
-  .ms-detail-up, .ms-detail-down {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .ms-detail .chart {
-    flex: 1;
-  }
-
-  .ms-detail .ms-detail-title {
-    font-size: 18px;
-    color: #828282;
-  }
-
-  .ms-detail .ms-detail-count {
-    font-size: 28px;
-    color: #00ACFF;
-  }
-
-  .ms-detail p {
-    letter-spacing: .2em;
-  }
 </style>

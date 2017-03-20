@@ -1,9 +1,9 @@
 <template>
-  <div class="ms-main">
-    <div class="ms-chart">
+  <div class="ms-main ms-main-flex">
+    <div class="ms-left-chart">
       <div style="width: 100%;height: 100%" id="map"></div>
     </div>
-    <div class="ms-detail">
+    <div class="ms-right-detail">
       <el-select v-model="value" placeholder="请选择" style="width: 100%">
         <el-option
           v-for="item in options"
@@ -207,43 +207,5 @@
   }
 </script>
 <style scoped>
-  .ms-main {
-    width: 100%;
-    min-height: calc(100% - 40px);
-    padding: 1%;
-    display: flex;
-  }
 
-  .ms-main .ms-chart {
-    flex: 0 0 70%;
-  }
-
-  .ms-main .ms-detail {
-    flex: 0 0 30%;
-    padding: 1%;
-  }
-
-  .ms-detail-info {
-    padding: 25px 40px;
-    margin-top: 50px;
-    text-align: left;
-    background-color: #fff;
-    letter-spacing: 1px;
-    border-radius: 5px;
-  }
-
-  .ms-detail-info > p {
-    margin-top: 15px;
-  }
-
-  .ms-detail-info > .title {
-    margin: 0;
-    color: #828282;
-    font-size: 22px;
-  }
-
-  .ms-detail-info > span {
-    font-size: 32px;
-    color: #21C3FC;
-  }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div class="content-wrap">
+  <div class="outer-content-wrap">
     <div class="ms-toggle">
       <span class="ms-toggle-item" :class="{ 'is-active': isActive == 1}" @click="toggleItem(1)">总体情况</span>
       <span class="ms-toggle-item" :class="{ 'is-active': isActive == 2}" @click="toggleItem(2)">企业信息</span>
@@ -48,10 +48,13 @@
   }
 </script>
 <style scoped>
-  .content-wrap {
+  @import "../../assets/app.css";
+
+  .outer-content-wrap {
     width: 100%;
     min-height: 100%;
     height: 100%;
+    overflow: hidden;
   }
 
   .ms-toggle {

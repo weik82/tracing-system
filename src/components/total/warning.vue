@@ -1,5 +1,5 @@
 <template>
-  <div style="height:  calc(100% - 40px);width: 100%;overflow: hidden">
+  <div class="warn-wrap">
     <v-warningchart @toggleItem="toggleItem" v-if="warningType=='chart'"></v-warningchart>
     <v-warninglist @toggleItem="toggleItem" v-if="warningType=='list'"></v-warninglist>
   </div>
@@ -28,5 +28,10 @@
   }
 </script>
 <style scoped>
-
+  .warn-wrap {
+    height: calc(100% - 40px);
+    min-height: calc(100% - 40px);
+    width: 100%;
+    overflow: hidden
+  }
 </style>

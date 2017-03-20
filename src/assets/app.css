@@ -1,0 +1,165 @@
+.ms-main {
+  width: 100%;
+  min-height: calc(100% - 40px);
+  height: calc(100% - 40px);
+  padding: 1%;
+}
+
+.ms-main-flex {
+  display: flex;
+}
+
+.ms-main-scroll {
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.ms-main > .ms-left-chart {
+  flex: 0 0 65%;
+  position: relative;
+}
+
+.ms-main > .ms-up-chart {
+  padding: 5px 20px;
+  width: 100%;
+  height: 250px;
+  margin-bottom: 10px;
+  transition: height 0.5s;
+  overflow: hidden;
+}
+
+.ms-main > .ms-right-detail {
+  flex: 0 0 35%;
+  padding: 1%;
+}
+
+.ms-main > .ms-down-table {
+  min-height: calc(100% - 250px);
+}
+
+.content-wrap {
+  border-radius: 3px;
+  background-color: #fff;
+}
+
+.content-wrap > .content-header {
+  width: 100%;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.content-wrap > .content-header > .content-header-title {
+  font-size: 18px;
+}
+
+.content-wrap > .content-header > .content-header-form {
+  display: flex;
+  align-items: center;
+}
+/*分页*/
+.ms-pagination {
+  height: 40px;
+  width: 100%;
+  text-align: center;
+  padding-top: 5px;
+}
+
+/*商品 报检 企业 右侧*/
+.circle-checked {
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  text-align: center;
+  line-height: 32px;
+  border-radius: 18px;
+  margin: 0 5px;
+  cursor: pointer;
+}
+
+.circle-checked.is-circle-checked {
+  border: 1px solid #09ACFF;
+  color: #09ACFF;
+}
+
+.el-icon-caret-top1 {
+  margin-left: 20px;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  border-radius: 16px;
+  background-color: #E2E2E2;
+  color: #fff;
+  cursor: pointer;
+}
+
+.el-icon-caret-bottom:before {
+  content: "\E604" !important;
+}
+
+/*扫码 预警 右侧*/
+.ms-main .ms-r-detail {
+  padding: 10px 20px;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+}
+
+.ms-r-detail .ms-detail-up {
+  flex: 0 0 40%;
+  border-bottom: 1px solid #D5D5D5;
+}
+
+.ms-r-detail .ms-detail-down {
+  flex: 0 0 60%;
+}
+
+.ms-r-detail .ms-detail-up, .ms-r-detail .ms-detail-down {
+  display: flex;
+  flex-direction: column;
+}
+
+.ms-r-detail .chart {
+  flex: 1;
+}
+
+.ms-r-detail .ms-detail-title {
+  font-size: 18px;
+  color: #828282;
+}
+
+.ms-r-detail .ms-detail-count {
+  font-size: 28px;
+  color: #00ACFF;
+}
+
+.ms-r-detail p {
+  letter-spacing: .2em;
+}
+
+/*全网右侧*/
+.ms-detail-info {
+  padding: 25px 40px;
+  margin-top: 50px;
+  text-align: left;
+  background-color: #fff;
+  letter-spacing: 1px;
+  border-radius: 5px;
+}
+
+.ms-detail-info > p {
+  margin-top: 15px;
+}
+
+.ms-detail-info > .title {
+  margin: 0;
+  color: #828282;
+  font-size: 22px;
+}
+
+.ms-detail-info > span {
+  font-size: 32px;
+  color: #21C3FC;
+}

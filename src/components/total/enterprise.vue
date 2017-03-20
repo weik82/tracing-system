@@ -1,6 +1,6 @@
 <template>
-  <div class="ms-main-enterprise">
-    <div class="ms-chart content-wrap" :style="{height:(chartStatus?'50':'250')+'px'}">
+  <div class="ms-main ms-main-scroll">
+    <div class="ms-up-chart content-wrap" :style="{height:(chartStatus?'50':'250')+'px'}">
       <div class="content-header">
         <span class="content-header-title">全网企业备案时间分布统计</span>
         <div class="content-header-form">
@@ -17,9 +17,11 @@
             placeholder="选择日期范围" style="width: 200px;margin: 0 10px">
           </el-date-picker>
           <span :class="{'is-circle-checked':circleChecked=='day'}" @click="circleChecked='day'" class="circle-checked">天</span>
-          <span :class="{'is-circle-checked':circleChecked=='week'}" @click="circleChecked='week'" class="circle-checked">周</span>
-          <span :class="{'is-circle-checked':circleChecked=='month'}" @click="circleChecked='month'" class="circle-checked">月</span>
-          <i class="el-icon-caret-top" :class="{'el-icon-caret-bottom':chartStatus}"
+          <span :class="{'is-circle-checked':circleChecked=='week'}" @click="circleChecked='week'"
+                class="circle-checked">周</span>
+          <span :class="{'is-circle-checked':circleChecked=='month'}" @click="circleChecked='month'"
+                class="circle-checked">月</span>
+          <i class="el-icon-caret-top el-icon-caret-top1" :class="{'el-icon-caret-bottom':chartStatus}"
              @click="chartStatus=!chartStatus;"></i>
         </div>
       </div>
@@ -170,7 +172,7 @@
         this.mapChart.setOption(this.chartOption);
       },
       search(){
-          alert(this.input5);
+        alert(this.input5);
       }
     },
     mounted(){
@@ -181,86 +183,4 @@
   }
 </script>
 <style scoped>
-  .content-header {
-    width: 100%;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .content-header .content-header-title {
-    font-size: 18px;
-  }
-
-  .content-header .content-header-form {
-    display: flex;
-    align-items: center;
-  }
-
-  .content-wrap {
-    border-radius: 2px;
-    background-color: #fff;
-  }
-
-  .ms-main-enterprise {
-    width: 100%;
-    min-height: calc(100% - 40px);
-    padding: 1%;
-    height: calc(100% - 40px);
-    overflow-y: scroll;
-    overflow-x: hidden;
-  }
-
-  .ms-main-enterprise .ms-chart {
-    padding: 5px 20px;
-    width: 100%;
-    height: 250px;
-    margin-bottom: 10px;
-    transition: height 0.5s;
-    overflow: hidden;
-  }
-
-  .ms-main-enterprise .ms-table {
-    min-height: calc(100% - 200px);
-  }
-
-  .ms-pagination {
-    height: 40px;
-    width: 100%;
-    text-align: center;
-    padding-top: 5px;
-  }
-
-  .circle-checked {
-    display: inline-block;
-    width: 32px;
-    height: 32px;
-    text-align: center;
-    line-height: 32px;
-    border-radius: 18px;
-    margin: 0 5px;
-    cursor: pointer;
-  }
-
-  .circle-checked.is-circle-checked {
-    border: 1px solid #09ACFF;
-    color: #09ACFF;
-  }
-
-  .el-icon-caret-top {
-    margin-left: 20px;
-    width: 30px;
-    height: 30px;
-    line-height: 30px;
-    text-align: center;
-    border-radius: 16px;
-    background-color: #E2E2E2;
-    color: #fff;
-    cursor: pointer;
-  }
-
-  .el-icon-caret-bottom:before {
-    content: "\E604" !important;
-  }
 </style>

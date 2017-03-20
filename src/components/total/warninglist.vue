@@ -1,16 +1,29 @@
 <template>
-  <div class="ms-main-enterprise">
-    <div class="ms-table content-wrap">
+  <div class="ms-main">
+    <div class="ms-all-table content-wrap">
       <div class="content-header">
-        <span class="content-header-title" style="padding-left: 20px">商品信息列表</span>
+        <span class="content-header-title">商品信息列表</span>
         <div class="content-header-form">
-          <el-input placeholder="请输入商品名称" v-model="input5" style="width: 240px;margin-right: 20px">
-            <el-button slot="append" icon="search" @click="search">搜索</el-button>
-          </el-input>
+          <el-select v-model="value1" placeholder="请选择" style="width: 100px">
+            <el-option
+              v-for="item in options"
+              :label="item.label"
+              :value="item.value"
+              :key="item.value">
+            </el-option>
+          </el-select>
+          <el-select v-model="value2" placeholder="请选择" style="width: 200px;margin-left: 40px">
+            <el-option
+              v-for="item in options1"
+              :label="item.label"
+              :value="item.value"
+              :key="item.value">
+            </el-option>
+          </el-select>
         </div>
       </div>
-      <div style="width: 100%;height: calc(100% - 120px)">
-        <el-table :data="tableData" style="width: 100%;">
+      <div style="width: 100%;height: calc(100% - 80px)">
+        <el-table :data="tableData" style="height: 100%;width: 100%" height="'100%'">
           <el-table-column
             prop="date"
             label="日期"
@@ -27,18 +40,18 @@
           </el-table-column>
         </el-table>
       </div>
-      <div class="ms-pagination">
+      <div class="ms-pagination" style="background-color: #eef1f6;padding-top: 4px">
         <el-pagination
           @current-change=""
           :current-page="3"
           :page-size="100"
           layout="jumper, prev, pager, next, total"
-          :total="400" class="test1">
+          :total="400">
         </el-pagination>
       </div>
-      <div class="ms-pagination" style="background-color: #ffffff">
-        <el-button type="primary" @click="toToggle(1)">返回</el-button>
-      </div>
+    </div>
+    <div class="ms-pagination" style="padding-top: 4px;">
+      <el-button type="primary" @click="toToggle(1)">返回</el-button>
     </div>
   </div>
 </template>
@@ -47,6 +60,16 @@
   export default {
     data(){
       return {
+        value1:'全国',
+        value2:'全网追溯系统',
+        options: [
+          {label: '全国', value: '全国'},
+          {label: '浙江省', value: '浙江省'}
+        ],
+        options1: [
+          {label: '全网追溯系统', value: '全网追溯系统'},
+          {label: '跨境电商追溯系统', value: '跨境电商追溯系统'}
+        ],
         tableData: [
           {
             date: '2016-05-02',
@@ -117,45 +140,14 @@
   }
 </script>
 <style scoped>
-  .content-header {
-    width: 100%;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .content-header .content-header-title {
-    font-size: 18px;
-  }
-
-  .content-header .content-header-form {
-    display: flex;
-    align-items: center;
-  }
-
-  .content-wrap {
-    border-radius: 2px;
-    background-color: #fff;
-  }
-
-  .ms-main-enterprise {
-    width: 100%;
-    padding: 1%;
+  .ms-main {
     height: 100%;
-    overflow-y: scroll;
-    overflow-x: hidden;
+    min-height: 100%;
   }
 
-  .ms-main-enterprise > .ms-table {
-    height: 100%;
+  .ms-main > .ms-all-table {
+    height: calc(100% - 40px);
   }
-
-  .ms-pagination {
-    height: 40px;
-    width: 100%;
-    text-align: center;
-    padding-top: 5px;
-    background-color: #eef1f6;
-  }
+  .content-header>.content-header-title{padding-left: 20px}
+  .content-header>.content-header-form{padding-right: 20px}
 </style>
