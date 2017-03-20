@@ -1,29 +1,26 @@
 <template>
   <div class="feedback-wrap">
-    <v-chart @toggleItem="toggleItem" v-if="feedbackType=='chart'"></v-chart>
-    <v-list @toggleItem="toggleItem" v-if="feedbackType=='list'"></v-list>
-    <v-detail @toggleItem="toggleItem" v-if="feedbackType=='detail'"></v-detail>
+    <v-list @toggleItem="toggleItem" v-if="historyType=='list'"></v-list>
+    <v-detail @toggleItem="toggleItem" v-if="historyType=='detail'"></v-detail>
   </div>
 </template>
 
 <script>
-  import vChart from './fb_total-chart.vue';
-  import vList from './fb-total-list.vue'
-  import vDetail from './fb-total-detail-list.vue'
+  import vList from './historylist.vue'
+  import vDetail from './historydetail.vue'
   export default {
     components: {
-      vChart,
       vList,
       vDetail
     },
     data(){
       return {
-        feedbackType: 'chart'
+        historyType: 'list'
       }
     },
     methods: {
       toggleItem(index){
-        this.feedbackType = index;
+        this.historyType = index;
       }
     },
     mounted(){

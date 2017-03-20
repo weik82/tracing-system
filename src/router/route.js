@@ -43,7 +43,7 @@ export default new Router({
         },
         {
           path: 'recallhistory',//召回历史
-          component: resolve => require(['../components/page/recallhistory.vue'], resolve),
+          component: resolve => require(['../components/recall/recallhistory.vue'], resolve),
         }
       ]
     },

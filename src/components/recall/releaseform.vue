@@ -1,6 +1,8 @@
 <template>
   <div class="ms-main">
-    <div class="main-header">设置召回目标商品信息</div>
+    <div class="main-header">
+      <span class="content-header-title">设置召回目标商品信息</span>
+    </div>
     <div class="content-wrap">
       <div class="content-header">
         <span class="content-header-title">基本信息</span>
@@ -8,7 +10,7 @@
       <div class="form-wrap">
         <el-form ref="form" :model="form" label-width="80px" label-position="left">
           <el-form-item label="商品名*">
-            <el-input v-model="form.name"  placeholder="请输入商品名"></el-input>
+            <el-input v-model="form.name" placeholder="请输入商品名"></el-input>
           </el-form-item>
           <el-form-item label="生产日期">
             <el-date-picker
@@ -92,12 +94,14 @@
   }
 </script>
 <style scoped>
-  .ms-main{
+  .ms-main {
+    padding: 0 1% 1%;
     min-height: 100%;
     height: 100%;
     overflow-x: hidden;
     overflow-y: scroll;
   }
+
   .form-wrap {
     background-color: #F8F8F8;
     border-radius: 4px;
