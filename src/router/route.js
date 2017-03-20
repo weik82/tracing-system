@@ -31,7 +31,7 @@ export default new Router({
         },
         {
           path: 'fb_total',//用户反馈(全网)
-          component: resolve => require(['../components/page/fb_total.vue'], resolve),
+          component: resolve => require(['../components/userfeedback/fb_total.vue'], resolve),
         },
         {
           path: 'fb_crossborder',//用户反馈(跨境电商)

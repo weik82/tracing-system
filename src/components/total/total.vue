@@ -48,7 +48,6 @@
   }
 </script>
 <style scoped>
-  @import "../../assets/app.css";
 
   .outer-content-wrap {
     width: 100%;

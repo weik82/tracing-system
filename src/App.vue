@@ -12,4 +12,5 @@ export default {
 
 <style>
   @import "../static/css/index.css";
+  @import "./assets/app.css";
 </style>
