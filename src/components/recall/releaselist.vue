@@ -5,7 +5,12 @@
         <span class="content-header-title">商品信息列表</span>
       </div>
       <div style="width: 100%;height: calc(100% - 80px)">
-        <el-table :data="tableData" style="height: 100%;width: 100%" height="'100%'">
+        <el-table ref="table" :data="tableData" style="height: 100%;width: 100%" height="'100%'"  @selection-change="handleSelectionChange">
+          <el-table-column
+            type="selection"
+            :reserve-selection="true"
+            width="55">
+          </el-table-column>
           <el-table-column
             prop="date"
             label="日期"
@@ -38,6 +43,8 @@
     <div class="ms-pagination" style="padding-top: 4px;">
       <el-button type="primary" @click="toToggle('form')">返回1212</el-button>
       <el-button type="primary" @click="toToggle('submit')">下一步</el-button>
+      <el-button type="primary" @click="test">111</el-button>
+      <el-button type="primary" @click="test1">2221</el-button>
     </div>
   </div>
 </template>
@@ -46,6 +53,7 @@
   export default {
     data(){
       return {
+        multipleSelection:[],
         tableData: [
           {
             date: '2016-05-02',
@@ -107,9 +115,19 @@
       toToggle(flag){
         this.$emit('toggleItem', flag);
       },
+      handleSelectionChange(val) {
+        this.multipleSelection = val;
+        console.log(this.multipleSelection);
+      },
       cellClick(index, row){
-        console.log(index, row);
+//        console.log(index, row);
         this.toToggle('detail');
+      },
+      test(){
+          this.$refs.table.clearSelection()
+      },
+      test1(){
+        console.log(this.multipleSelection);
       }
     },
     mounted(){
