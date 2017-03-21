@@ -1,7 +1,7 @@
 <template>
-  <div class="feedback-wrap">
+  <div class="recall-wrap">
     <v-list @toggleItem="toggleItem" v-if="historyType=='list'"></v-list>
-    <v-detail @toggleItem="toggleItem" v-if="historyType=='detail'"></v-detail>
+    <v-detail :option="option" @toggleItem="toggleItem" v-if="historyType=='detail'"></v-detail>
   </div>
 </template>
 
@@ -15,23 +15,24 @@
     },
     data(){
       return {
+        option: null,
         historyType: 'list'
       }
     },
     methods: {
-      toggleItem(index){
-        this.historyType = index;
+      toggleItem(option){
+        this.option = option.config||{};
+        this.historyType = option.type;
       }
     },
     mounted(){
       this.$nextTick(function () {
-
       })
     }
   }
 </script>
 <style scoped>
-  .feedback-wrap {
+  .recall-wrap {
     height: 100%;
     min-height: 100%;
     width: 100%;

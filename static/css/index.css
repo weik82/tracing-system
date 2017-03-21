@@ -31,6 +31,9 @@ a {
 .el-scrollbar__wrap{
   overflow-x: hidden!important;
 }
+.el-table .cell{
+  white-space: nowrap!important;
+}
 /*elementui 样式重置 end*/
 /*动画 start*/
 .move-enter-active, .move-leave-active {

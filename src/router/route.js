@@ -33,10 +33,10 @@ export default new Router({
           path: 'fb_total',//用户反馈(全网)
           component: resolve => require(['../components/userfeedback/fb_total.vue'], resolve),
         },
-        {
+       /* {
           path: 'fb_crossborder',//用户反馈(跨境电商)
           component: resolve => require(['../components/page/fb_crossborder.vue'], resolve),
-        },
+        },*/
         {
           path: 'releaserecall',//发布召回
           component: resolve => require(['../components/recall/releaserecall.vue'], resolve),
