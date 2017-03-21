@@ -123,7 +123,7 @@
 </template>
 
 <script>
-  import {recallHistory} from '../../config/config'
+  import {recallHistory} from '../../../config/config'
   export default {
     data(){
       return {

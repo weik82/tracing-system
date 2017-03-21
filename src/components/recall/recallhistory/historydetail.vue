@@ -130,8 +130,8 @@
 </template>
 
 <script>
-  import {recallDetail} from '../../config/config';
-  import vDownload from '../common/download.vue'
+  import {recallDetail} from '../../../config/config';
+  import vDownload from '../../common/download.vue'
   export default {
     components: {
       vDownload

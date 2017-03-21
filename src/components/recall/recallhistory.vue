@@ -6,8 +6,8 @@
 </template>
 
 <script>
-  import vList from './historylist.vue'
-  import vDetail from './historydetail.vue'
+  import vList from './recallhistory/historylist.vue'
+  import vDetail from './recallhistory/historydetail.vue'
   export default {
     components: {
       vList,

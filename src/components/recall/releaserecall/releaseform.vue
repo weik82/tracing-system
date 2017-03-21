@@ -14,8 +14,9 @@
           </el-form-item>
           <el-form-item label="生产日期">
             <el-date-picker
-              v-model="form.pdata"
+              v-model="form.pdate"
               type="daterange"
+              :editable="false"
               placeholder="请选择生产日期范围">
             </el-date-picker>
           </el-form-item>
@@ -40,55 +41,58 @@
         <el-form ref="form" :model="form" label-width="80px" label-position="left">
           <el-form-item label="入境日期">
             <el-date-picker
-              v-model="form.pdata"
+              v-model="form.indate"
               type="daterange"
+              :editable="false"
               placeholder="请选择入境日期范围">
             </el-date-picker>
           </el-form-item>
           <el-form-item label="报检日期">
             <el-date-picker
-              v-model="form.pdata"
+              v-model="form.idate"
               type="daterange"
+              :editable="false"
               placeholder="请选择报检日期范围">
             </el-date-picker>
           </el-form-item>
           <el-form-item label="报关口岸">
-            <el-input v-model="form.producer" placeholder="请输入报关口岸"></el-input>
+            <el-input v-model="form.port" placeholder="请输入报关口岸"></el-input>
           </el-form-item>
           <el-form-item label="报检单号">
-            <el-input v-model="form.origin" placeholder="请输入报检单号"></el-input>
+            <el-input v-model="form.icode" placeholder="请输入报检单号"></el-input>
           </el-form-item>
         </el-form>
       </div>
     </div>
     <div class="ms-pagination" style="padding-top: 4px;">
-      <el-button type="primary" @click="toToggle('list')">搜索商品12211</el-button>
+      <el-button type="primary" @click="tolList()">搜索商品</el-button>
     </div>
   </div>
 </template>
 
 <script>
   export default {
+    props: {
+      forms: {
+        type: Object,
+        required: true
+      }
+    },
     data(){
       return {
-        form: {
-          name: '',
-          pdata: '',
-          producer: '',
-          origin: '',
-          code: '',
-          country: ''
-        }
+        form: this.forms
       }
     },
     methods: {
-      toToggle(flag){
-        this.$emit('toggleItem', flag);
+      tolList(){
+        this.$emit('toggleItem', 'list');
       },
+    },
+    created(){
+
     },
     mounted(){
       this.$nextTick(function () {
-
       })
     }
   }
@@ -117,6 +121,6 @@
   }
 
   .el-form .el-form-item {
-    flex: 0 0 40%;
+    flex: 0 0 35%;
   }
 </style>

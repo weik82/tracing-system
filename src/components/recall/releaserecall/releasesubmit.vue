@@ -1,6 +1,6 @@
 <template>
   <div class="ms-main">
-    <div class="main-header">已选13件商品</div>
+    <div class="main-header">已选{{selectedCount.length}}件商品</div>
     <div class="content-wrap">
       <div class="content-header">
         <span class="content-header-title">召回原因</span>
@@ -8,7 +8,7 @@
       <div class="form-wrap">
         <el-form ref="form" :model="form" label-width="80px" label-position="top">
           <el-form-item label="召回原因" class="el-form-item-textarea">
-            <el-input type="textarea" v-model="form.name"></el-input>
+            <el-input type="textarea" v-model="form.reason"></el-input>
           </el-form-item>
           <el-form-item>
             <el-button type="primary" size="small" style="position: relative">
@@ -21,7 +21,7 @@
     </div>
     <div class="content-wrap">
       <div class="content-header">
-        <span class="content-header-title">召回公告2</span>
+        <span class="content-header-title">召回公告</span>
       </div>
       <div class="form-wrap">
         <el-form ref="form" :model="form" label-width="40px" label-position="left">
@@ -33,49 +33,60 @@
             <el-checkbox label="5" name="type">包装问题</el-checkbox>
           </el-checkbox-group>
           <el-form-item label="其他">
-            <el-input v-model="form.name" size="mini" placeholder=""></el-input>
+            <el-input v-model="form.other" size="mini" placeholder="请输入其他原因"></el-input>
           </el-form-item>
         </el-form>
       </div>
     </div>
     <div class="ms-pagination" style="padding-top: 4px;">
       <el-button type="primary" @click="toToggle('list')">返回重选商品</el-button>
-      <el-button type="primary" @click="toToggle('form')">发布召回1</el-button>
+      <el-button type="primary" @click="toToggle('form')">发布召回</el-button>
     </div>
   </div>
 </template>
 
 <script>
   export default {
+    props: {
+      selectedList: {
+        type: Object,
+        required: true
+      }
+    },
     data(){
       return {
         form: {
-          fileSrc: null,
-          fileName: '',
+          reason: '',
           file: null,
-          name: '',
-          pdata: '',
-          producer: '',
-          origin: '',
-          code: '',
-          country: '',
-          type: []
+          fileName: '',
+          type: [],
+          other: ''
         }
       }
     },
     methods: {
-      toToggle(flag){
-        this.$emit('toggleItem', flag);
+      toToggle(type){
+        if (type == 'form') {
+          this.$emit('initDate');
+        }
+        this.$emit('toggleItem', type);
       },
       uploadFile(event){
         this.form.file = event.target.files[0];
         this.form.fileName = event.target.files[0].name;
-//        this.form.fileSrc =URL.createObjectURL(event.target.files[0]);
-        console.dir(event.target.files[0])
       },
       deleteFile(){
         this.form.file = null;
         this.form.fileName = '';
+      }
+    },
+    computed: {
+      selectedCount(){
+        let _arr = [];
+        for (let key in this.selectedList) {
+          _arr.push(...this.selectedList[key]);
+        }
+        return _arr;
       }
     },
     mounted(){
