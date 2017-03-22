@@ -28,12 +28,19 @@ a {
 .el-table td, .el-table th {
   height: 36px !important;
 }
-.el-scrollbar__wrap{
-  overflow-x: hidden!important;
+
+.el-scrollbar__wrap {
+  overflow-x: hidden !important;
 }
-.el-table .cell{
+
+.el-table.space-nowrap .cell {
   white-space: nowrap!important;
 }
+
+.el-table .info-row {
+  color: #F55C17 !important;
+}
+
 /*elementui 样式重置 end*/
 /*动画 start*/
 .move-enter-active, .move-leave-active {

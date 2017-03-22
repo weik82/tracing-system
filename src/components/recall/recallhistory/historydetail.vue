@@ -8,7 +8,7 @@
         <span class="content-header-title">召回商品列表</span>
       </div>
       <div style="width: 100%;height: calc(100% - 80px)">
-        <el-table :data="detailData.list" style="height: 100%;width: 100%" height="'100%'">
+        <el-table class="space-nowrap" :data="detailData.list" style="height: 100%;width: 100%" height="'100%'">
           <el-table-column
             prop="name"
             label="商品名称"
@@ -177,8 +177,7 @@
     height: 100%;
     min-height: 100%;
     padding: 0 1% 1%;
-    overflow-x: hidden;
-    overflow-y: scroll;
+    min-width: 1100px;
   }
 
   .ms-main > .ms-half-table {

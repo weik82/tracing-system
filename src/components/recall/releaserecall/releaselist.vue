@@ -2,10 +2,10 @@
   <div class="ms-main">
     <div class="ms-all-table content-wrap">
       <div class="content-header">
-        <span class="content-header-title">商品信息列表1</span>
+        <span class="content-header-title">商品信息列表</span>
       </div>
       <div style="width: 100%;height: calc(100% - 80px)">
-        <el-table ref="table" @selection-change="handleSelectionChange" :data="tableData"
+        <el-table class="space-nowrap" ref="tables" @selection-change="handleSelectionChange" :data="tableData"
                   style="height: 100%;width: 100%" height="'100%'">
           <el-table-column
             type="selection"
@@ -126,16 +126,41 @@
     },
     methods: {
       toToggle(type){
+        if (type == 'submit') {
+          if (Object.keys(this.multipleSelection).length == 0) {
+            this.$message({
+              message: '请选择召回商品',
+              type: 'error'
+            });
+            return false;
+          }
+        }
         this.$emit('toggleItem', type);
       },
       handleSelectionChange(val) {
-        this.multipleSelection[this.config.currentPage] = val;
+        if (val.length == 0) {
+          delete this.multipleSelection[this.config.currentPage];
+        } else {
+          this.multipleSelection[this.config.currentPage] = val;
+        }
         console.log(this.multipleSelection);
+      }
+    },
+    computed: {
+      selectedCount(){
+        let _arr = [];
+        for (let key in this.selectedList) {
+          _arr.push(...this.selectedList[key]);
+        }
+        return _arr;
       }
     },
     mounted(){
       this.$nextTick(function () {
-
+        let vm = this;
+        this.selectedCount.forEach((item) => {
+          this.$refs['tables'].toggleRowSelection(item);
+        })
       })
     }
   }
@@ -144,6 +169,7 @@
   .ms-main {
     height: 100%;
     min-height: 100%;
+    min-width: 1100px;
   }
 
   .ms-main > .ms-all-table {

@@ -100,8 +100,7 @@
   .ms-main {
     min-height: 100%;
     height: 100%;
-    overflow-x: hidden;
-    overflow-y: scroll;
+    min-width: 1100px;
     padding: 0 1% 1%;
   }
 

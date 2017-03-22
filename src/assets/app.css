@@ -135,10 +135,11 @@
 .ms-r-detail .ms-detail-count {
   font-size: 28px;
   color: #00ACFF;
+  font-weight: bold;
 }
 
 .ms-r-detail p {
-  letter-spacing: .2em;
+  letter-spacing: .1em;
 }
 
 /*全网右侧*/

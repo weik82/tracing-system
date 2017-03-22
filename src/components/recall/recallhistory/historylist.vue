@@ -22,7 +22,7 @@
     </div>
     <div class="ms-all-table content-wrap">
       <div style="width: 100%;height: calc(100% - 40px)">
-        <el-table :data="tableData" style="height: 100%;width: 100%" height="'100%'">
+        <el-table class="space-nowrap" :data="tableData" style="height: 100%;width: 100%" height="'100%'">
           <el-table-column
             prop="id"
             label="召回编号"
@@ -164,6 +164,7 @@
     height: 100%;
     min-height: 100%;
     padding: 0 1% 1%;
+    min-width: 1100px;
   }
 
   .ms-main > .ms-all-table {

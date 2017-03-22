@@ -34,8 +34,8 @@
 <style scoped>
   .recall-wrap {
     height: 100%;
-    min-height: 100%;
+    /*min-height: 100%;*/
     width: 100%;
-    overflow: hidden
+    overflow: auto;
   }
 </style>
