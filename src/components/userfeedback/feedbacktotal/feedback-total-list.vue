@@ -80,7 +80,7 @@
       },
       cellClick(index, row, event){
         event.preventDefault();
-        this.$router.push({path: '/home/fb_crossborder', query: {trade: row.trade}, params: {userId: 123}});
+        this.$router.push({path: '/home/fb_crossborder/1', query: {trade: row.trade}, params: {userId: 123}});
         console.log(index, row, event);
 //        this.toToggle('detail');
       }

@@ -1,8 +1,14 @@
 <template>
   <div class="feedback-wrap">
-    <v-chart @toggleItem="toggleItem" v-if="feedbackType=='chart'"></v-chart>
-    <v-list :options="option" @toggleItem="toggleItem" v-if="feedbackType=='list'"></v-list>
-    <v-detail :options="option" @toggleItem="toggleItem" v-if="feedbackType=='detail'"></v-detail>
+    <transition name="move" mode="out-in">
+      <v-chart @toggleItem="toggleItem" v-if="feedbackType=='chart'"></v-chart>
+    </transition>
+    <transition name="move" mode="out-in">
+      <v-list :options="option" @toggleItem="toggleItem" v-if="feedbackType=='list'"></v-list>
+    </transition>
+    <transition name="move" mode="out-in">
+      <v-detail :options="option" @toggleItem="toggleItem" v-if="feedbackType=='detail'"></v-detail>
+    </transition>
   </div>
 </template>
 <script>

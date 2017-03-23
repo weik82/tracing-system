@@ -22,6 +22,7 @@
 </template>
 
 <script>
+  import * as types from '../store/types'
   export default {
     data(){
       return {
@@ -33,18 +34,10 @@
     },
     methods: {
       submitForm() {
-        console.log(this.form);
-        this.$router.push('/home');
-        /* const self = this;
-         self.$refs[formName].validate((valid) => {
-         if (valid) {
-         localStorage.setItem('ms_username', self.ruleForm.username);
-         self.$router.push('/readme');
-         } else {
-         console.log('error submit!!');
-         return false;
-         }
-         });*/
+        this.$store.commit(types.USER_LOGIN, {token: '1234567'});
+        window.localStorage.setItem('token', '1234567');
+        let redirect = decodeURIComponent(this.$route.query.redirect || '/');
+        this.$router.push({path: redirect});
       }
     }
 

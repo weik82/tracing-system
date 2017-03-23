@@ -14,7 +14,7 @@
         <el-submenu index="2">
           <template slot="title"><span class="opened-title">用户反馈情况</span></template>
           <el-menu-item index="/home/fb_total">全网跨境电商追溯系统</el-menu-item>
-          <el-menu-item index="/home/fb_crossborder">跨境电商追溯系统</el-menu-item>
+          <el-menu-item index="/home/fb_crossborder/1">跨境电商追溯系统</el-menu-item>
         </el-submenu>
         <el-submenu index="3">
           <template slot="title"><span class="opened-title">商品召回系统</span></template>

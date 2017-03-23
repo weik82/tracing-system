@@ -44,10 +44,10 @@ a {
 /*elementui 样式重置 end*/
 /*动画 start*/
 .move-enter-active, .move-leave-active {
-  transition: opacity .5s;
+  transition: opacity .3s;
 }
 
-.move-enter, .move-leave {
+.move-enter, .move-leave-to {
   opacity: 0;
 }
 

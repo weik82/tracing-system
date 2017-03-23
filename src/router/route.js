@@ -1,9 +1,15 @@
 import Vue from 'vue'
+import store from '../store/store'
+import * as types from '../store/types'
 import Router from 'vue-router'
 
 Vue.use(Router);
 
-export default new Router({
+// 页面刷新时，重新赋值token
+if (window.localStorage.getItem('token')) {
+  store.commit(types.USER_LOGIN, {token: window.localStorage.getItem('token')})
+}
+const router = new Router({
   routes: [
     {
       path: '/',
@@ -15,11 +21,18 @@ export default new Router({
     },
     {
       path: '/home',
+      meta: {
+        requireAuth: true,
+      },
       component: resolve => require(['../components/home.vue'], resolve),
       children: [
         {
           path: '',
           redirect: 'total'
+        },
+        {
+          path: 'fb_crossborder',
+          redirect: 'fb_crossborder/1'
         },
         {
           path: 'total',//全网跨境电商追溯系统
@@ -34,7 +47,7 @@ export default new Router({
           component: resolve => require(['../components/userfeedback/feedback_total.vue'], resolve),
         },
         {
-          path: 'fb_crossborder',//用户反馈(跨境电商)
+          path: 'fb_crossborder/:id',//用户反馈(跨境电商)
           component: resolve => require(['../components/userfeedback/feedback_crossborder.vue'], resolve),
         },
         {
@@ -46,6 +59,24 @@ export default new Router({
           component: resolve => require(['../components/recall/recallhistory.vue'], resolve),
         }
       ]
-    },
+    }
   ]
-})
+});
+router.beforeEach((to, from, next) => {
+  console.log(to);
+  if (to.matched.some(r => r.meta.requireAuth)) {
+    if (store.state.token) {
+      next();
+    }
+    else {
+      next({
+        path: '/login',
+        query: {redirect: to.fullPath}
+      })
+    }
+  }
+  else {
+    next();
+  }
+});
+export default router

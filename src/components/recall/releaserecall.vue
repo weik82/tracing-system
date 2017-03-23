@@ -1,8 +1,15 @@
 <template>
   <div class="recall-wrap">
-    <v-form :forms="form" @toggleItem="toggleItem" v-if="recallType=='form'"></v-form>
-    <v-list :forms="form" :selectedList="selectedList" @toggleItem="toggleItem" v-if="recallType=='list'"></v-list>
-    <v-submit @initDate="initDate" :selectedList="selectedList" @toggleItem="toggleItem" v-if="recallType=='submit'"></v-submit>
+    <transition name="move" mode="out-in">
+      <v-form :forms="form" @toggleItem="toggleItem" v-if="recallType=='form'"></v-form>
+    </transition>
+    <transition name="move" mode="out-in">
+      <v-list :forms="form" :selectedList="selectedList" @toggleItem="toggleItem" v-if="recallType=='list'"></v-list>
+    </transition>
+    <transition name="move" mode="out-in">
+      <v-submit @initDate="initDate" :selectedList="selectedList" @toggleItem="toggleItem"
+                v-if="recallType=='submit'"></v-submit>
+    </transition>
   </div>
 </template>
 

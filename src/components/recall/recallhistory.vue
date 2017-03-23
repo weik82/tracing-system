@@ -1,7 +1,11 @@
 <template>
   <div class="recall-wrap">
-    <v-list @toggleItem="toggleItem" v-if="historyType=='list'"></v-list>
-    <v-detail :option="option" @toggleItem="toggleItem" v-if="historyType=='detail'"></v-detail>
+    <transition name="move" mode="out-in">
+      <v-list @toggleItem="toggleItem" v-if="historyType=='list'"></v-list>
+    </transition>
+    <transition name="move" mode="out-in">
+      <v-detail :option="option" @toggleItem="toggleItem" v-if="historyType=='detail'"></v-detail>
+    </transition>
   </div>
 </template>
 
@@ -21,7 +25,7 @@
     },
     methods: {
       toggleItem(option){
-        this.option = option.config||{};
+        this.option = option.config || {};
         this.historyType = option.type;
       }
     },
