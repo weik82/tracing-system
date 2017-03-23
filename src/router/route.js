@@ -28,15 +28,15 @@ const router = new Router({
       children: [
         {
           path: '',
-          redirect: 'total'
+          redirect: 'trace'
         },
         {
           path: 'fb_crossborder',
           redirect: 'fb_crossborder/1'
         },
         {
-          path: 'total',//全网跨境电商追溯系统
-          component: resolve => require(['../components/total/total.vue'], resolve)
+          path: 'trace',//全网跨境电商追溯系统
+          component: resolve => require(['../components/trace/trace.vue'], resolve)
         },
         {
           path: 'crossborder',//跨境电商追溯系统

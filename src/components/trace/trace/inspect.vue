@@ -14,6 +14,7 @@
           <el-date-picker
             v-model="value6"
             type="daterange"
+            :editable="false"
             placeholder="选择日期范围" style="width: 200px;margin: 0 10px">
           </el-date-picker>
           <span :class="{'is-circle-checked':circleChecked=='day'}" @click="circleChecked='day'" class="circle-checked">天</span>

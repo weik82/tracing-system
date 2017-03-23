@@ -44,7 +44,7 @@ a {
 /*elementui 样式重置 end*/
 /*动画 start*/
 .move-enter-active, .move-leave-active {
-  transition: opacity .3s;
+  transition: opacity .5s;
 }
 
 .move-enter, .move-leave-to {
@@ -98,13 +98,13 @@ a {
 
 .ms-tooltip > .tip-up {
   top: calc(10% + 2px);
-  transform: skewX(30deg);
+  transform: skewX(20deg);
   transform-origin: 0 0 0;
 }
 
 .ms-tooltip > .tip-down {
   bottom: calc(10% + 2px);
-  transform: skewX(-30deg);
+  transform: skewX(-20deg);
   transform-origin: 0 100% 0;
 }
 

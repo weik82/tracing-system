@@ -6,8 +6,8 @@
 </template>
 
 <script>
-  import vWarningchart from './warningchart.vue';
-  import vWarninglist from './warninglist.vue'
+  import vWarningchart from './warning/warningchart.vue';
+  import vWarninglist from './warning/warninglist.vue'
   export default {
     components: {
       vWarningchart,

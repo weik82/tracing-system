@@ -18,12 +18,12 @@
 </template>
 
 <script>
-  import vOverall from './overall.vue';
-  import vEnterprise from './enterprise.vue'
-  import vProduct from './product.vue'
-  import vInspect from './inspect.vue'
-  import vScan from './scan.vue'
-  import vWarning from './warning.vue'
+  import vOverall from './trace/overall.vue';
+  import vEnterprise from './trace/enterprise.vue'
+  import vProduct from './trace/product.vue'
+  import vInspect from './trace/inspect.vue'
+  import vScan from './trace/scan.vue'
+  import vWarning from './trace/warning.vue'
   export default {
     components: {
       vOverall,
@@ -51,7 +51,7 @@
 
   .outer-content-wrap {
     width: 100%;
-    min-height: 100%;
+    /*min-height: 100%;*/
     height: 100%;
     overflow: hidden;
   }

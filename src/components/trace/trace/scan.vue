@@ -4,6 +4,7 @@
       <el-date-picker
         v-model="value6"
         type="daterange"
+        :editable="false"
         placeholder="选择日期范围" style="width: 200px;position: absolute;right: 10px;top: 10px;z-index: 10;">
       </el-date-picker>
       <div style="width: 100%;height: 100%" id="map"></div>
@@ -26,8 +27,8 @@
 
 <script>
   import echarts from 'echarts'
-  import 'echarts/map/js/china'
-  import {geoCoordMap} from '../../config/config'
+  import {geoCoordMap, mapData, mapData1} from '../../../config/config'
+  import {convertData} from '../../../config/util'
   export default {
     data(){
       return {
@@ -36,23 +37,25 @@
         pieChart: null,
         barChart: null,
         map: {
+          title: {
+            text: '全网用户反馈分布图',
+            left: 'left',
+            textStyle: {
+              color: '#828282',
+              fontSize: 20
+            }
+          },
           tooltip: {
-            trigger: 'item',
-            // alwaysShowContent: true,
-            backgroundColor: '',
-            borderColor: '',
-            position: 'left',
-            formatter: function (v) {
-              // console.log(v);
-              return '<div class="ms-outer-wrap">' +
-                '<div class="ms-tooltip"> ' +
-                '<div class="tip-up"></div><div class="tip-down"></div> ' +
-                '<div class="tip-detail"> ' +
-                '<p class="tip-role">' + v.name + '</p> ' +
-                '<p>企业数量：' + v.data.data1.cnt1 + '家</p> ' +
-                '<p>备案商品：' + v.data.data1.cnt2 + '个</p> ' +
-                '<p>商品数量：' + v.data.data1.cnt3 + '件</p> ' +
-                '</div></div></div>';
+            trigger: 'item'
+          },
+          legend: {
+            orient: 'vertical',
+            bottom: 20,
+            left: 20,
+            data: ['跨境电商追溯系统', '宁波跨境追溯系统'],
+            textStyle: {
+              color: '#000',
+              fontSize: 18
             }
           },
           geo: {
@@ -65,126 +68,65 @@
             roam: false,
             itemStyle: {
               normal: {
-                // shadowColor: '#20c3ff',
-                shadowBlur: 1
-                // borderColor: '#20c3ff',
-                // borderWidth: 3.5
+                areaColor: '#fff',
+                borderColor: '#D2D2D2',
+                borderWidth: 2
               },
               emphasis: {
-                areaColor: '#20c3ff'
+                areaColor: '#fefefe'
               }
-            },
-            /*top: '17%',
-             left: '18%',
-             bottom: '5%'*/
+            }
           },
           series: [
             {
-              silent: true,
-              name: '中国',
-              type: 'map',
-              map: 'china',
-              selectedMode: false,
-              /*top: '17%',
-               left: '18%',
-               bottom: '5%',*/
+              name: '宁波跨境追溯系统',
+              type: 'scatter',
+              coordinateSystem: 'geo',
+              legendHoverLink: false,
+              data: convertData(mapData1),
+              symbolSize: function (val) {
+                return val[2] / 10;
+              },
               label: {
                 normal: {
+                  formatter: '{b}',
+                  position: 'right',
                   show: false
                 },
                 emphasis: {
-                  show: false
+                  show: true
                 }
               },
-              data: [
-                {name: '广东', selected: true},
-                {name: '浙江', selected: true},
-                {name: '北京', selected: true}
-              ],
               itemStyle: {
                 normal: {
-                  areaColor: '#fff',
-                  borderColor: '#206082',
-                  borderWidth: 1
-                },
-                emphasis: {
-                  areaColor: '#20c3ff'
+                  color: '#FF6E00'
                 }
               }
             },
             {
-              name: 'city',
+              name: '跨境电商追溯系统',
               type: 'scatter',
               coordinateSystem: 'geo',
-              symbolSize: [30, 40],
-              symbolOffset: [0, '-50%'],
-              data: [
-                {
-                  "name": "浙江",
-                  "value": geoCoordMap['杭州'],
-                  symbol: 'image://static/image/icon.png',
-                  data1: {
-                    province: '浙江',
-                    cnt1: 39,
-                    cnt2: 485,
-                    cnt3: 1324449,
-                    link: 'http://ziqa.ciqca.com/index.html'
-                  }
-                },
-                {
-                  "name": "广东",
-                  "value": geoCoordMap['广州'],
-                  symbol: 'image://static/image/icon.png',
-                  data1: {
-                    province: '广东',
-                    cnt1: 6,
-                    cnt2: 84,
-                    cnt3: 65466,
-                    link: 'http://gziqa.ciqca.com/index.html'
-                  }
-                },
-                {
-                  "name": "北京",
-                  "value": geoCoordMap['北京'],
-                  symbol: 'image://static/image/icon.png',
-                  data1: {
-                    province: '北京',
-                    cnt1: 68,
-                    cnt2: 3336,
-                    cnt3: 4064649,
-                    link: 'http://bj.ciqca.com/index.html'
-                  }
-                }
-              ],
-              showEffectOn: 'render',
-              rippleEffect: {
-                brushType: 'stroke'
+              legendHoverLink: false,
+              data: convertData(mapData),
+              symbolSize: function (val) {
+                return val[2] / 10;
               },
-              hoverAnimation: true,
               label: {
                 normal: {
                   formatter: '{b}',
-                  position: ['100%', 7],
+                  position: 'right',
                   show: false
                 },
                 emphasis: {
-                  formatter: '{b}',
-                  position: ['100%', 7],
-                  show: true,
-                  textStyle: {
-                    color: '#fff',
-                    fontSize: 16
-                  }
+                  show: true
                 }
               },
               itemStyle: {
                 normal: {
-                  color: '#f4e925',
-                  shadowBlur: 10,
-                  shadowColor: '#333'
+                  color: '#00C1FF'
                 }
-              },
-              zlevel: 2
+              }
             }
           ]
         },
@@ -276,8 +218,13 @@
     },
     methods: {
       initMap(){
-        this.mapChart = echarts.init(document.getElementById('map'));
-        this.mapChart.setOption(this.map);
+        this.axios.get('/static/json/china.json').then((res) => {
+          if (res.status == 200) {
+            echarts.registerMap('china', res.data);
+            this.mapChart = echarts.init(document.getElementById('map'));
+            this.mapChart.setOption(this.map);
+          }
+        });
       },
       initPie(){
         this.pieChart = echarts.init(document.getElementById('scanpie'));

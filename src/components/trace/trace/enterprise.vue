@@ -4,16 +4,18 @@
       <div class="content-header" style="padding: 0">
         <span class="content-header-title">全网企业备案时间分布统计</span>
         <div class="content-header-form">
-          <el-select v-model="value" placeholder="请选择" style="width: 100px;margin: 0 10px">
+          <el-select v-model="chartType" placeholder="请选择" style="width: 100px;margin: 0 10px">
             <el-option
               v-for="item in options"
               :label="item.label"
-              :value="item.value" :key="item.value">
+              :value="item.value"
+              :key="item.value">
             </el-option>
           </el-select>
           <el-date-picker
-            v-model="value6"
+            v-model="date"
             type="daterange"
+            :editable="false"
             placeholder="选择日期范围" style="width: 200px;margin: 0 10px">
           </el-date-picker>
           <span :class="{'is-circle-checked':circleChecked=='day'}" @click="circleChecked='day'" class="circle-checked">天</span>
@@ -31,12 +33,12 @@
       <div class="content-header">
         <span class="content-header-title">企业信息列表</span>
         <div class="content-header-form">
-          <el-input placeholder="请输入企业名称" v-model="input5" style="width: 240px;">
+          <el-input placeholder="请输入企业名称" v-model="vendorName" style="width: 240px;">
             <el-button slot="append" icon="search" @click="search">搜索</el-button>
           </el-input>
         </div>
       </div>
-      <el-table :data="tableData" style="width: 100%;" height="400">
+      <el-table :data="tableData" style="width: 100%;">
         <el-table-column
           prop="date"
           label="日期"
@@ -70,16 +72,16 @@
   export default {
     data(){
       return {
-        circleChecked: 'day',
         chartStatus: false,
-        value: '折线',
-        input5: '',
-        value6: '',
+        circleChecked: 'day',
+        chartType: '折线',
+        vendorName: '',
+        date: [],
         options: [
           {label: '折线', value: '折线'},
           {label: '饼图', value: '饼图'}
         ],
-        mapChart: null,
+        chart: null,
         chartOption: {
           backgroundColor: '#fff',
           tooltip: {
@@ -114,51 +116,48 @@
             date: '2016-05-02',
             name: '王小虎',
             address: '上海市普陀区金沙江路 1518 弄'
-          }, {
+          },
+          {
             date: '2016-05-04',
             name: '王小虎',
             address: '上海市普陀区金沙江路 1517 弄'
-          }, {
+          },
+          {
             date: '2016-05-01',
             name: '王小虎',
             address: '上海市普陀区金沙江路 1519 弄'
-          }, {
+          },
+          {
             date: '2016-05-03',
             name: '王小虎',
             address: '上海市普陀区金沙江路 1516 弄'
-          }, {
+          },
+          {
             date: '2016-05-04',
             name: '王小虎',
             address: '上海市普陀区金沙江路 1517 弄'
-          }, {
+          },
+          {
             date: '2016-05-01',
             name: '王小虎',
             address: '上海市普陀区金沙江路 1519 弄'
-          }, {
+          },
+          {
             date: '2016-05-03',
             name: '王小虎',
             address: '上海市普陀区金沙江路 1516 弄'
-          }, {
+          },
+          {
             date: '2016-05-04',
             name: '王小虎',
             address: '上海市普陀区金沙江路 1517 弄'
-          }, {
+          },
+          {
             date: '2016-05-01',
             name: '王小虎',
             address: '上海市普陀区金沙江路 1519 弄'
-          }, {
-            date: '2016-05-03',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1516 弄'
-          }, {
-            date: '2016-05-04',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1517 弄'
-          }, {
-            date: '2016-05-01',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1519 弄'
-          }, {
+          },
+          {
             date: '2016-05-03',
             name: '王小虎',
             address: '上海市普陀区金沙江路 1516 弄'
@@ -168,11 +167,11 @@
     },
     methods: {
       initChart(){
-        this.mapChart = echarts.init(document.getElementById('chart'));
-        this.mapChart.setOption(this.chartOption);
+        this.chart = echarts.init(document.getElementById('chart'));
+        this.chart.setOption(this.chartOption);
       },
       search(){
-        alert(this.input5);
+        alert(this.vendorName);
       }
     },
     mounted(){
@@ -183,7 +182,7 @@
   }
 </script>
 <style scoped>
-  .el-icon-caret-top1{
-    line-height: 30px!important;
+  .el-icon-caret-top1 {
+    line-height: 30px !important;
   }
 </style>

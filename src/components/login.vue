@@ -36,7 +36,7 @@
       submitForm() {
         this.$store.commit(types.USER_LOGIN, {token: '1234567'});
         window.localStorage.setItem('token', '1234567');
-        let redirect = decodeURIComponent(this.$route.query.redirect || '/');
+        let redirect = decodeURIComponent(this.$route.query.redirect || '/home');
         this.$router.push({path: redirect});
       }
     }
