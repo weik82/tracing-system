@@ -99,7 +99,7 @@
               },
               itemStyle: {
                 normal: {
-                  color: '#FF6E00'
+                  color: '#CA48FC'
                 }
               }
             },
@@ -124,13 +124,14 @@
               },
               itemStyle: {
                 normal: {
-                  color: '#00C1FF'
+                  color: '#FF6555'
                 }
               }
             }
           ]
         },
         scanpie: {
+          color: ['#C547F6', '#FF6655', '#FF9E5E'],
           tooltip: {
             trigger: 'item',
             formatter: "{a} <br/>{b} : {c} ({d}%)",
@@ -141,19 +142,18 @@
           legend: {
             orient: 'vertical',
             left: 'right',
-            data: ['直接访问', '邮件营销', '联盟广告', '视频广告']
+            data: ['跨境电商追溯系统', '宁波跨境追溯系统', '广东跨境追溯系统']
           },
           series: [
             {
-              name: '访问来源',
+              name: '系统来源',
               type: 'pie',
-              radius: '60%',
+              radius: '70%',
               center: ['30%', '55%'],
               data: [
-                {value: 335, name: '直接访问'},
-                {value: 310, name: '邮件营销'},
-                {value: 234, name: '联盟广告'},
-                {value: 135, name: '视频广告'}
+                {value: 335, name: '跨境电商追溯系统'},
+                {value: 310, name: '宁波跨境追溯系统'},
+                {value: 234, name: '广东跨境追溯系统'}
               ],
               label: {
                 normal: {
@@ -177,6 +177,7 @@
           ]
         },
         scanbar: {
+          color: ['#C547F6', '#FF6655', '#FF9E5E'],
           title: {
             text: '跨境电商追溯系统: 3122',
             left: 'center',
@@ -203,14 +204,29 @@
           },
           yAxis: {
             type: 'category',
-            data: ['巴西', '印尼', '美国', '印度', '中国', '世界人口']
+            data: ['浙江', '上海', '北京', '福建', '江苏', '广东']
           },
           series: [
             {
-              name: '2011年',
+              name: '跨境电商追溯系统',
               type: 'bar',
+              stack:'总量',
               barWidth: 15,
               data: [18203, 23489, 29034, 104970, 131744, 630230]
+            },
+            {
+              name: '宁波跨境追溯系统',
+              type: 'bar',
+              stack:'总量',
+              barWidth: 15,
+              data: [4820, 9348, 12904, 50490, 91744, 430230]
+            },
+            {
+              name: '广东跨境追溯系统',
+              type: 'bar',
+              stack:'总量',
+              barWidth: 15,
+              data: [9820, 12348, 17904, 80490, 31744, 230230]
             }
           ]
         }

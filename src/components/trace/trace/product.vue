@@ -18,9 +18,12 @@
             placeholder="选择日期范围" style="width: 200px;margin: 0 10px">
           </el-date-picker>
           <span :class="{'is-circle-checked':circleChecked=='day'}" @click="circleChecked='day'" class="circle-checked">天</span>
-          <span :class="{'is-circle-checked':circleChecked=='week'}" @click="circleChecked='week'" class="circle-checked">周</span>
-          <span :class="{'is-circle-checked':circleChecked=='month'}" @click="circleChecked='month'" class="circle-checked">月</span>
-          <i class="el-icon-caret-top el-icon-caret-top1" :class="{'el-icon-caret-bottom':chartStatus}" @click="chartStatus=!chartStatus;"></i>
+          <span :class="{'is-circle-checked':circleChecked=='week'}" @click="circleChecked='week'"
+                class="circle-checked">周</span>
+          <span :class="{'is-circle-checked':circleChecked=='month'}" @click="circleChecked='month'"
+                class="circle-checked">月</span>
+          <i class="el-icon-caret-top el-icon-caret-top1" :class="{'el-icon-caret-bottom':chartStatus}"
+             @click="chartStatus=!chartStatus;"></i>
         </div>
       </div>
       <div style="width: 100%;height:calc(100% - 40px)" id="chart"></div>
@@ -53,10 +56,10 @@
       <div class="ms-pagination">
         <el-pagination
           @current-change=""
-          :current-page="3"
-          :page-size="100"
-          layout="jumper, prev, pager, next, total"
-          :total="400">
+          :current-page="config.currentPage"
+          :page-size="config.pageSize"
+          layout="total, prev, pager, next, jumper"
+          :total="config.total">
         </el-pagination>
       </div>
     </div>
@@ -68,6 +71,11 @@
   export default {
     data(){
       return {
+        config: {
+          currentPage: 1,
+          pageSize: 10,
+          total: 3
+        },
         circleChecked: 'day',
         chartStatus: false,
         value: '饼图',
@@ -181,7 +189,7 @@
   }
 </script>
 <style scoped>
-  .el-icon-caret-top1{
-    line-height: 30px!important;
+  .el-icon-caret-top1 {
+    line-height: 30px !important;
   }
 </style>

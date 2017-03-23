@@ -57,10 +57,10 @@
       <div class="ms-pagination">
         <el-pagination
           @current-change=""
-          :current-page="3"
-          :page-size="100"
-          layout="jumper, prev, pager, next, total"
-          :total="400">
+          :current-page="config.currentPage"
+          :page-size="config.pageSize"
+          layout="total, prev, pager, next, jumper"
+          :total="config.total">
         </el-pagination>
       </div>
     </div>
@@ -72,6 +72,11 @@
   export default {
     data(){
       return {
+        config: {
+          currentPage: 1,
+          pageSize: 10,
+          total: 3
+        },
         chartStatus: false,
         circleChecked: 'day',
         chartType: '折线',
