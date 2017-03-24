@@ -9,7 +9,7 @@
         <el-submenu index="1">
           <template slot="title"><span class="opened-title">全网跨境电商追溯系统</span></template>
           <el-menu-item index="/home/trace">全网跨境电商追溯系统</el-menu-item>
-          <el-menu-item index="/home/crossborder">跨境电商追溯系统</el-menu-item>
+          <el-menu-item index="/home/crossborder/1">跨境电商追溯系统</el-menu-item>
         </el-submenu>
         <el-submenu index="2">
           <template slot="title"><span class="opened-title">用户反馈情况</span></template>

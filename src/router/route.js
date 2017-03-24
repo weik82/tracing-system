@@ -39,8 +39,8 @@ const router = new Router({
           component: resolve => require(['../components/trace/trace.vue'], resolve)
         },
         {
-          path: 'crossborder',//跨境电商追溯系统
-          component: resolve => require(['../components/crossborder/crossborder.vue'], resolve),
+          path: 'crossborder/:id',//跨境电商追溯系统
+          component: resolve => require(['../components/trace/crossbordertrace.vue'], resolve),
         },
         {
           path: 'fb_total',//用户反馈(全网)

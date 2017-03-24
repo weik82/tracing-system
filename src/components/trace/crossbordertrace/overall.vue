@@ -2,13 +2,11 @@
   <div class="ms-main ms-main-flex">
     <div class="ms-left-chart">
       <div style="width: 100%;height: 100%" id="map"></div>
-      <transition-group name="move" mode="out-in">
-        <v-pop v-if="showPop" v-for="(item, index) in popItems"
-               :key="index"
-               :position="item.position"
-               :type="item.typeId">
-        </v-pop>
-      </transition-group>
+      <v-pop v-if="showPop" v-for="(item, index) in popItems"
+             :key="index"
+             :position="item.position"
+             :type="item.typeId">
+      </v-pop>
     </div>
     <div class="ms-right-detail">
       <el-select v-model="value" @change="provinceChange" placeholder="请选择" style="width: 100%">
@@ -53,7 +51,7 @@
         chinaChart: null,
         china: {
           title: {
-            text: '全网追溯系统分布图',
+            text: '跨境电商追溯系统分布图',
             left: 'left',
             textStyle: {
               color: '#828282',
@@ -93,8 +91,7 @@
               fontSize: 16
             },
             data: [
-              {name: '跨境电商追溯系统', icon: 'image://static/image/icon.png'},
-              {name: '宁波跨境追溯系统', icon: 'image://static/image/icon2.png'}
+              {name: '跨境电商追溯系统', icon: 'image://static/image/icon.png'}
             ]
           },
           geo: {
@@ -187,35 +184,6 @@
                   "name": "杭州",
                   "value": geoCoordMap['杭州'],
                   symbol: 'image://static/image/icon.png'
-                }
-              ],
-              label: {
-                normal: {
-                  formatter: '{b}',
-                  position: 'right',
-                  show: false
-                },
-                emphasis: {
-                  show: false
-                }
-              },
-              itemStyle: {
-                normal: {
-                  color: '#F06C00'
-                }
-              }
-            },
-            {
-              name: '宁波跨境追溯系统',
-              type: 'scatter',
-              coordinateSystem: 'geo',
-              symbolSize: [27, 36],
-              symbolOffset: [0, '-50%'],
-              data: [
-                {
-                  "name": "宁波",
-                  "value": geoCoordMap['宁波'],
-                  symbol: 'image://static/image/icon2.png'
                 }
               ],
               label: {
@@ -375,9 +343,8 @@
           t = setTimeout(function () {
             vm.showPop = false;
             clearTimeout(t);
-          }, 5000);
-          vm.timeoutPop();
-        }, 20 * 1000)
+          }, 10000)
+        }, 10 * 1000)
       },
       initChinaMap(){
         this.axios.get(location.origin + '/static/json/china.json').then((res) => {
@@ -393,25 +360,19 @@
                 vm.value = p.name;
               }
             });
-            this.timeoutPop();
           }
         });
       },
       initProvinceMap(_province){
         this.axios.get(location.origin + '/static/json/province/' + _province + '.json').then((res) => {
           if (res.status == 200) {
-            clearTimeout(this.timeout);
             echarts.registerMap(_province, res.data);
             this.chinaChart && this.chinaChart.dispose && this.chinaChart.dispose();
             this.chinaChart = echarts.init(document.getElementById('map'));
             this.province.geo.map = _province;
             this.chinaChart.setOption(this.province);
-            let vm = this;
-            this.chinaChart.on('click', function (p) {
-              console.log(p);
-              if (p.seriesType == 'scatter') {
-                vm.$router.push({path: '/home/crossborder/1', query: {isActive: 2}});
-              }
+            this.chinaChart.on('click', function () {
+
             })
           }
         });

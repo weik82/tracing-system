@@ -12,7 +12,7 @@
     <div class="ms-right-detail ms-r-detail">
       <div class="ms-detail-up">
         <p class="ms-detail-title">系统用户反馈统计(次)</p>
-        <div class="chart" style="display: flex;align-items: center">
+        <div class="chart">
           <div class="up-detail">
             <p>反馈总数</p>
             <p class="ms-detail-count">34252435</p>
@@ -275,11 +275,18 @@
     flex-direction: column;
     border-bottom: 1px solid #D5D5D5;
   }
-  .ms-detail-up{
+
+  .ms-detail-up {
     flex: 0 0 30%;
   }
-   .ms-detail-mid, .ms-detail-down {
+
+  .ms-detail-mid, .ms-detail-down {
     flex: 0 0 35%
+  }
+
+  .ms-detail-up .chart {
+    display: flex;
+    align-items: center
   }
 
   .more {
@@ -288,10 +295,12 @@
     color: #21C3FC;
     cursor: pointer
   }
-  .up-detail{
+
+  .up-detail {
     flex: 0 0 50%;
   }
-  .bad-count{
+
+  .bad-count {
     color: #FF6F00;
   }
 </style>
