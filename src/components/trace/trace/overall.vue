@@ -42,6 +42,7 @@
     },
     data(){
       return {
+        loading2: true,
         timeout: null,
         showPop: false,
         popItems: [],
@@ -67,7 +68,7 @@
             borderColor: '',
             position: 'left',
             formatter: function (v) {
-              console.log(v);
+//              console.log(v);
               if (v.seriesType == 'map' && v.data && v.data.cnt1) {
                 return '<div class="ms-outer-wrap">' +
                   '<div class="ms-tooltip"> ' +
@@ -140,8 +141,9 @@
               label: {normal: {show: false}, emphasis: {show: false}},
               data: [
                 {
-                  name: '北京', selected: true,
-                  province: '北京',
+                  name: '北京',
+                  selected: true,
+                  province: 'bejing',
                   cnt1: 68,
                   cnt2: 3336,
                   cnt3: 4064649
@@ -150,15 +152,16 @@
                 {
                   name: '浙江',
                   selected: true,
-                  province: '浙江',
+                  province: 'zhejiang',
                   cnt1: 39,
                   cnt2: 485,
                   cnt3: 1324449
 
                 },
                 {
-                  name: '广东', selected: true,
-                  province: '广东',
+                  name: '广东',
+                  selected: true,
+                  province: 'guangdong',
                   cnt1: 6,
                   cnt2: 84,
                   cnt3: 65466
@@ -172,21 +175,19 @@
               coordinateSystem: 'geo',
               symbolSize: [27, 36],
               symbolOffset: [0, '-50%'],
+              symbol: 'image://static/image/icon.png',
               data: [
                 {
                   "name": "广州",
                   "value": geoCoordMap['广州'],
-                  symbol: 'image://static/image/icon.png'
                 },
                 {
                   "name": "北京",
-                  "value": geoCoordMap['北京'],
-                  symbol: 'image://static/image/icon.png'
+                  "value": geoCoordMap['北京']
                 },
                 {
                   "name": "杭州",
-                  "value": geoCoordMap['杭州'],
-                  symbol: 'image://static/image/icon.png'
+                  "value": geoCoordMap['杭州']
                 }
               ],
               label: {
@@ -211,13 +212,11 @@
               coordinateSystem: 'geo',
               symbolSize: [27, 36],
               symbolOffset: [0, '-50%'],
-              data: [
-                {
-                  "name": "宁波",
-                  "value": geoCoordMap['宁波'],
-                  symbol: 'image://static/image/icon2.png'
-                }
-              ],
+              symbol: 'image://static/image/icon2.png',
+              data: [{
+                "name": "宁波",
+                "value": geoCoordMap['宁波']
+              }],
               label: {
                 normal: {
                   formatter: '{b}',
@@ -380,6 +379,7 @@
         }, 20 * 1000)
       },
       initChinaMap(){
+        this.loading2 = true;
         this.axios.get(location.origin + '/static/json/china.json').then((res) => {
           if (res.status == 200) {
             echarts.registerMap('china', res.data);
@@ -389,16 +389,19 @@
             let vm = this;
             this.chinaChart.on('click', function (p) {
               if (p.seriesType == 'map' && p.data.selected) {
-                vm.initProvinceMap('zhejiang');
-                vm.value = p.name;
+//                vm.initProvinceMap1('zhejiang');
+                vm.value = p.data.province;
               }
             });
             this.timeoutPop();
+            setTimeout(function () {
+              vm.loading2 = false;
+            }, 2000)
           }
         });
       },
-      initProvinceMap(_province){
-        this.axios.get(location.origin + '/static/json/province/' + _province + '.json').then((res) => {
+      initProvinceMap1(_province){
+        this.axios.get(location.origin + '/static/json/' + _province + '.json').then((res) => {
           if (res.status == 200) {
             clearTimeout(this.timeout);
             echarts.registerMap(_province, res.data);
@@ -408,7 +411,7 @@
             this.chinaChart.setOption(this.province);
             let vm = this;
             this.chinaChart.on('click', function (p) {
-              console.log(p);
+//              console.log(p);
               if (p.seriesType == 'scatter') {
                 vm.$router.push({path: '/home/crossborder/1', query: {isActive: 2}});
               }
@@ -420,13 +423,14 @@
         if (v == 'china') {
           this.initChinaMap();
         } else {
-          this.initProvinceMap(v);
+          this.initProvinceMap1(v);
         }
       }
     },
     mounted(){
       this.$nextTick(function () {
-        this.initChinaMap()
+        this.initChinaMap();
+        this.axios.get(location.origin + '/static/json/province/beijing.json')
       })
     }
   }

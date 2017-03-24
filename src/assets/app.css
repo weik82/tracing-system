@@ -17,6 +17,7 @@
 .ms-main > .ms-left-chart {
   flex: 0 0 65%;
   position: relative;
+  height: 100%;
 }
 
 .ms-main > .ms-up-chart {
@@ -31,6 +32,7 @@
 .ms-main > .ms-right-detail {
   flex: 0 0 35%;
   padding: 1%;
+  height: 100%;
 }
 
 .ms-main > .ms-down-table {

@@ -36,7 +36,7 @@
         }
       },
       content(){
-        return this.typeId == 1 ? '企业备案' : '商品备案';
+        return this.type == 1 ? '企业备案' : '商品备案';
       }
     },
     mounted(){
@@ -80,7 +80,6 @@
   .ms-pop .el-icon-caret-bottom {
     position: absolute;
     top: 100%;
-    color: #FFE000;
     left: 50%;
     transform: translate(-50%, -30%);
   }

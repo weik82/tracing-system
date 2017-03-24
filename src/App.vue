@@ -11,6 +11,6 @@ export default {
 </script>
 
 <style>
-  @import "../static/css/main.css";
-  @import "./assets/app.css";
+  /*@import "../static/css/main.css";
+  @import "./assets/app.css";*/
 </style>

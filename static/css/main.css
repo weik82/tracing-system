@@ -25,10 +25,6 @@ a {
   background-color: #20AEFC !important;
 }
 
-.el-table td, .el-table th {
-  height: 36px !important;
-}
-
 .el-scrollbar__wrap {
   overflow-x: hidden !important;
 }
