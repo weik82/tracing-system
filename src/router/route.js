@@ -59,6 +59,10 @@ const router = new Router({
           component: resolve => require(['../components/recall/recallhistory.vue'], resolve),
         }
       ]
+    },
+    {
+      path: '*',
+      component: resolve => require(['../components/notfound.vue'], resolve)
     }
   ]
 });

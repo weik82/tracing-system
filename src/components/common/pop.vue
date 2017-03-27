@@ -36,12 +36,11 @@
         }
       },
       content(){
-        return this.type == 1 ? '企业备案' : '商品备案';
+        return this.type == 1 ? '企业备案' : '产品备案';
       }
     },
     mounted(){
       this.$nextTick(function () {
-        console.log(this.$el);
       })
     }
   }

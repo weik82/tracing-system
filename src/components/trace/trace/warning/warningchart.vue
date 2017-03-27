@@ -237,7 +237,7 @@
         this.$emit('toggleItem', flag);
       },
       initMap(){
-        this.axios.get('/static/json/china.json').then((res) => {
+        this.axios.get(location.origin + '/static/json/china.json').then((res) => {
           if (res.status == 200) {
             echarts.registerMap('china', res.data);
             this.mapChart = echarts.init(document.getElementById('mapchart'));

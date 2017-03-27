@@ -5,8 +5,7 @@
         <span class="content-header-title">商品信息列表</span>
       </div>
       <div style="width: 100%;height: calc(100% - 80px)">
-        <el-table class="space-nowrap" ref="tables" @selection-change="handleSelectionChange" :data="tableData"
-                  style="height: 100%;width: 100%" height="'100%'">
+        <el-table class="space-nowrap" ref="tables" @selection-change="handleSelectionChange" :data="tableData" style="height: 100%;width: 100%" height="'100%'">
           <el-table-column
             type="selection"
             width="55">

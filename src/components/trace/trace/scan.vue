@@ -131,7 +131,7 @@
           ]
         },
         scanpie: {
-          color: ['#00DEFF','#56F04A','#FFE000'],
+          color: ['#00DEFF', '#56F04A', '#FFE000'],
           tooltip: {
             trigger: 'item',
             formatter: "{a} <br/>{b} : {c} ({d}%)",
@@ -177,7 +177,7 @@
           ]
         },
         scanbar: {
-          color: ['#00DEFF','#56F04A','#FFE000'],
+          color: ['#00DEFF', '#56F04A', '#FFE000'],
           title: {
             text: '跨境电商追溯系统: 3122',
             left: 'center',
@@ -210,21 +210,21 @@
             {
               name: '跨境电商追溯系统',
               type: 'bar',
-              stack:'总量',
+              stack: '总量',
               barWidth: 15,
               data: [18203, 23489, 29034, 104970, 131744, 630230]
             },
             {
               name: '宁波跨境追溯系统',
               type: 'bar',
-              stack:'总量',
+              stack: '总量',
               barWidth: 15,
               data: [4820, 9348, 12904, 50490, 91744, 430230]
             },
             {
               name: '广东跨境追溯系统',
               type: 'bar',
-              stack:'总量',
+              stack: '总量',
               barWidth: 15,
               data: [9820, 12348, 17904, 80490, 31744, 230230]
             }
@@ -234,7 +234,7 @@
     },
     methods: {
       initMap(){
-        this.axios.get('/static/json/china.json').then((res) => {
+        this.axios.get(location.origin + '/static/json/china.json').then((res) => {
           if (res.status == 200) {
             echarts.registerMap('china', res.data);
             this.mapChart = echarts.init(document.getElementById('map'));

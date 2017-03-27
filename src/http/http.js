@@ -5,18 +5,17 @@ import router from '../router/route'
 import {Loading} from 'element-ui';
 // axios 配置
 axios.defaults.timeout = 5000;
-// axios.defaults.baseURL = 'https://api.douban.com/v2';
-// axios.defaults.baseURL = 'http://500px.me';
-// let token='45d3aa452e6d64b4b6d554302626dd7d2dc4ab36'
-axios.defaults.baseURL = 'http://localhost:8080';
+axios.defaults.baseURL = 'http://10.12.0.96:8080/v2';
 // axios.defaults.headers.common['Authorization'] = `token ${token}`;
 // axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
-let loadingInstance;
+let loadingInstance,
+  reqCount = 0,
+  resCount = 0;
 // http request 拦截器
 axios.interceptors.request.use(
   config => {
+    reqCount++;
     loadingInstance = Loading.service({fullscreen: true});
-
     /* if (store.state.token) {
      config.headers.Authorization = `token ${store.state.token}`;
      }*/
@@ -29,9 +28,14 @@ axios.interceptors.request.use(
 // http response 拦截器
 axios.interceptors.response.use(
   response => {
-    setTimeout(function () {
-      loadingInstance.close();
-    }, 2000);
+    resCount++;
+    if (resCount == reqCount) {
+      setTimeout(function () {
+        loadingInstance.close();
+      }, 1500);
+      resCount = 0;
+      reqCount = 0
+    }
     return response;
   },
   error => {
