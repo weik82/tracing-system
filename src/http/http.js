@@ -32,7 +32,7 @@ axios.interceptors.response.use(
     if (resCount == reqCount) {
       setTimeout(function () {
         loadingInstance.close();
-      }, 1500);
+      }, 1000);
       resCount = 0;
       reqCount = 0
     }
@@ -50,6 +50,12 @@ axios.interceptors.response.use(
      })
      }
      }*/
+    setTimeout(function () {
+      loadingInstance.close();
+    }, 1000);
+    resCount = 0;
+    reqCount = 0;
+    console.log(error);
     return Promise.reject(error.response.data)
   });
 
