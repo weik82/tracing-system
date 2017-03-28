@@ -156,7 +156,6 @@
         };
         this.axios.post('/statistics/getvendordatabydate ', _data)
           .then((res) => {
-            console.log(res);
             if (res.status == 200) {
               let _data = res.data, _xAxis = [], _yAxis = [];
               _data.forEach((item) => {
@@ -165,7 +164,6 @@
               });
               this.chartOption.xAxis.data = _xAxis;
               this.chartOption.series[0].data = _yAxis;
-              console.log(this.chartOption);
               this.initChart();
             }
           })

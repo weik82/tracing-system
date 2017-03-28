@@ -172,7 +172,6 @@
               });
               this.chartOption.xAxis.data = _xAxis;
               this.chartOption.series[0].data = _yAxis;
-              console.log(this.chartOption);
               this.initChart();
             }
           })

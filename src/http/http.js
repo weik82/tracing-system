@@ -55,7 +55,6 @@ axios.interceptors.response.use(
     }, 1000);
     resCount = 0;
     reqCount = 0;
-    console.log(error);
     return Promise.reject(error.response.data)
   });
 
