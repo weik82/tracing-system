@@ -359,9 +359,10 @@
                 _arr.push({
                   name: sitem.platform,
                   value: _geoCoord,
-                  productcount: 90,
-                  tagcount: 3327,
-                  vendorcount: 24
+                  productcount: sitem.productcount,
+                  tagcount: sitem.tagcount,
+                  vendorcount: sitem.vendorcount,
+                  sysid: item.sysid
                 });
               });
               _legendData.push({
@@ -405,14 +406,17 @@
             this.chinaChart.setOption(this.province);
             let vm = this;
             this.chinaChart.on('click', function (p) {
+              console.log(p);
+              let _sysid = p.data.sysid;
               if (p.seriesType == 'scatter') {
-                vm.$router.push({path: '/home/crossborder/1', query: {isActive: 2}});
+                vm.$router.push({path: '/home/crossborder/' + _sysid, query: {isActive: 2}});
               }
             })
           }
         });
       },//初始化省份地图
       provinceChange(v){
+        console.log('change' + v);
         if (v == 'china') {
           this.getCountData({});
           this.getGeoData();

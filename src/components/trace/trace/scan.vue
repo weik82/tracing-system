@@ -18,7 +18,7 @@
       <div class="ms-detail-down">
         <p class="ms-detail-title" style="padding-top: 10px">全网各省扫码统计(次)</p>
         <div class="chart" style="overflow-y: scroll">
-          <div id="scanbar" style="width: 100%;height: 150%"></div>
+          <div id="scanbar" style="width: 100%;height: 125%"></div>
         </div>
       </div>
     </div>
@@ -37,7 +37,8 @@
         mapChart: null,
         pieChart: null,
         barChart: null,
-        map: {
+        scanMap: {
+          color: ['#FFE000', '#00DEFF'],
           title: {
             text: '全网用户反馈分布图',
             left: 'left',
@@ -53,7 +54,7 @@
             orient: 'vertical',
             bottom: 20,
             left: 20,
-            data: ['跨境电商追溯系统', '宁波跨境追溯系统'],
+            data: [],
             textStyle: {
               color: '#000',
               fontSize: 18
@@ -79,60 +80,60 @@
             }
           },
           series: [
-            {
-              name: '宁波跨境追溯系统',
-              type: 'scatter',
-              coordinateSystem: 'geo',
-              legendHoverLink: false,
-              data: convertData(mapData1),
-              symbolSize: function (val) {
-                return val[2] / 10;
-              },
-              label: {
-                normal: {
-                  formatter: '{b}',
-                  position: 'right',
-                  show: false
-                },
-                emphasis: {
-                  show: true
-                }
-              },
-              itemStyle: {
-                normal: {
-                  color: '#FFE000'
-                }
-              }
-            },
-            {
-              name: '跨境电商追溯系统',
-              type: 'scatter',
-              coordinateSystem: 'geo',
-              legendHoverLink: false,
-              data: convertData(mapData),
-              symbolSize: function (val) {
-                return val[2] / 10;
-              },
-              label: {
-                normal: {
-                  formatter: '{b}',
-                  position: 'right',
-                  show: false
-                },
-                emphasis: {
-                  show: true
-                }
-              },
-              itemStyle: {
-                normal: {
-                  color: '#00DEFF'
-                }
-              }
-            }
+            /* {
+             name: '宁波跨境追溯系统',
+             type: 'scatter',
+             coordinateSystem: 'geo',
+             legendHoverLink: false,
+             data: convertData(mapData1),
+             symbolSize: function (val) {
+             return val[2] / 10;
+             },
+             label: {
+             normal: {
+             formatter: '{b}',
+             position: 'right',
+             show: false
+             },
+             emphasis: {
+             show: true
+             }
+             },
+             itemStyle: {
+             normal: {
+             color: '#FFE000'
+             }
+             }
+             },
+             {
+             name: '跨境电商追溯系统',
+             type: 'scatter',
+             coordinateSystem: 'geo',
+             legendHoverLink: false,
+             data: convertData(mapData),
+             symbolSize: function (val) {
+             return val[2] / 10;
+             },
+             label: {
+             normal: {
+             formatter: '{b}',
+             position: 'right',
+             show: false
+             },
+             emphasis: {
+             show: true
+             }
+             },
+             itemStyle: {
+             normal: {
+             color: '#00DEFF'
+             }
+             }
+             }*/
           ]
         },
         scanPie: {
-          color: ['#00DEFF', '#56F04A', '#FFE000'],
+          color: ['#FFE000','#00DEFF', '#56F04A'],
           tooltip: {
             trigger: 'item',
             formatter: "{a} <br/>{b} : {c} ({d}%)",
@@ -143,19 +144,15 @@
           legend: {
             orient: 'vertical',
             left: 'right',
-            data: ['跨境电商追溯系统', '宁波跨境追溯系统', '广东跨境追溯系统']
+            data: []
           },
           series: [
             {
               name: '系统来源',
               type: 'pie',
-              radius: '70%',
-              center: ['30%', '55%'],
-              data: [
-                {value: 335, name: '跨境电商追溯系统'},
-                {value: 310, name: '宁波跨境追溯系统'},
-                {value: 234, name: '广东跨境追溯系统'}
-              ],
+              radius: '75%',
+              center: ['30%', '50%'],
+              data: [],
               label: {
                 normal: {
                   formatter: '{c}'
@@ -163,8 +160,8 @@
               },
               labelLine: {
                 normal: {
-                  length: 3,
-                  length2: 3
+                  length: 5,
+                  length2: 5
                 }
               },
               itemStyle: {
@@ -178,7 +175,7 @@
           ]
         },
         scanBar: {
-          color: ['#00DEFF', '#56F04A', '#FFE000'],
+          color: ['#FFE000','#00DEFF', '#56F04A'],
           tooltip: {
             trigger: 'axis',
             axisPointer: {
@@ -198,31 +195,9 @@
           },
           yAxis: {
             type: 'category',
-            data: ['浙江', '上海', '北京', '福建', '江苏', '广东']
+            data: []
           },
-          series: [
-            {
-              name: '跨境电商追溯系统',
-              type: 'bar',
-              stack: '总量',
-              barWidth: 15,
-              data: [18203, 23489, 29034, 104970, 131744, 630230]
-            },
-            {
-              name: '宁波跨境追溯系统',
-              type: 'bar',
-              stack: '总量',
-              barWidth: 15,
-              data: [4820, 9348, 12904, 50490, 91744, 430230]
-            },
-            {
-              name: '广东跨境追溯系统',
-              type: 'bar',
-              stack: '总量',
-              barWidth: 15,
-              data: [9820, 12348, 17904, 80490, 31744, 230230]
-            }
-          ]
+          series: []
         }
       }
     },
@@ -249,6 +224,10 @@
               this.initPie();
             }
           })
+      },//全网扫码统计(次)
+      initPie(){
+        this.pieChart = echarts.init(document.getElementById('scanpie'));
+        this.pieChart.setOption(this.scanPie);
       },
       getProvinceScanCount(){
         let _data = {
@@ -259,8 +238,58 @@
           .then((res) => {
             if (res.status == 200) {
               let _data = res.data, _yAxis = [], _series = [];
+              _data.provincedata.forEach((item) => {
+                _yAxis.push(item.province);
+              });
+              let _len = _data.platformdata.length - 1;
+              _data.platformdata.forEach((item, index) => {
+                if (index == _len) {
+                  let _count = [];
+                  item.count.forEach((sitem, sindex) => {
+                    _count.push({
+                      value: sitem,
+                      value1: _data.provincedata[sindex].count
+                    });
+                  })
+                  _series.push({
+                    name: item.platform,
+                    type: 'bar',
+                    stack: '总量',
+                    barWidth: 25,
+                    label: {
+                      normal: {
+                        textStyle: {
+                          color: '#000'
+                        },
+                        show: true,
+                        position: 'right',
+                        formatter: function (v) {
+                          return v.data.value1;
+                        }
+                      }
+                    },
+                    data: _count
+                  })
+                } else {
+                  _series.push({
+                    name: item.platform,
+                    type: 'bar',
+                    stack: '总量',
+                    barWidth: 15,
+                    data: item.count
+                  })
+                }
+              });
+              this.scanBar.yAxis.data = _yAxis;
+              this.scanBar.series = _series;
+              console.log(this.scanBar);
+              this.initBar();
             }
           })
+      },//全网各省扫码统计(次)
+      initBar(){
+        this.barChart = echarts.init(document.getElementById('scanbar'));
+        this.barChart.setOption(this.scanBar);
       },
       getSysPostionScanCount(){
         let _data = {
@@ -271,36 +300,48 @@
           .then((res) => {
             if (res.status == 200) {
               let _data = res.data, _series = [], _legend = [];
-              _data.data.forEach((item) => {
+              _data.forEach((item) => {
+                let _data = [];
+                item.position.forEach((sitem) => {
+                  _data.push({
+                    name: item.platform.substr(0, 2),
+                    value: [sitem.longitude, sitem.latitude, sitem.count]
+                  })
+                });
                 _series.push({
-                  value: item.count,
-                  name: item.platform
+                  name: item.platform,
+                  type: 'scatter',
+                  coordinateSystem: 'geo',
+                  legendHoverLink: false,
+                  data: _data,
+                  /* symbolSize: function (val) {
+                   return val[2] * 10;
+                   },*/
+                  label: {
+                    normal: {
+                      show: false
+                    },
+                    emphasis: {
+                      show: false
+                    }
+                  }
                 });
                 _legend.push(item.platform);
               });
-              this.scanPie.series[0].data = _series;
-              this.scanPie.legend.data = _legend;
-              this.scanTotal = _data.total;
-              this.initPie();
+              this.scanMap.legend.data = _legend;
+              this.scanMap.series = _series;
+              this.initMap();
             }
           })
-      },
+      },//全网用户反馈分布
       initMap(){
         this.axios.get(location.origin + '/static/json/china.json').then((res) => {
           if (res.status == 200) {
             echarts.registerMap('china', res.data);
             this.mapChart = echarts.init(document.getElementById('map'));
-            this.mapChart.setOption(this.map);
+            this.mapChart.setOption(this.scanMap);
           }
         });
-      },
-      initPie(){
-        this.pieChart = echarts.init(document.getElementById('scanpie'));
-        this.pieChart.setOption(this.scanPie);
-      },
-      initBar(){
-        this.barChart = echarts.init(document.getElementById('scanbar'));
-        this.barChart.setOption(this.scanBar);
       }
     },
     created(){
@@ -324,10 +365,9 @@
     },
     mounted(){
       this.$nextTick(function () {
-        this.initMap();
+        this.getSysPostionScanCount();
         this.getSystemScanCount();
         this.getProvinceScanCount();
-        this.initBar();
       })
     }
   }
