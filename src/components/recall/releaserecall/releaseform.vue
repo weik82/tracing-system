@@ -9,7 +9,7 @@
       </div>
       <div class="form-wrap">
         <el-form ref="form1" :model="form" :rules="rules" label-width="80px" label-position="left">
-          <el-form-item label="商品名*" prop="name">
+          <el-form-item label="商品名" prop="name">
             <el-input v-model="form.name" placeholder="请输入商品名"></el-input>
           </el-form-item>
           <el-form-item label="生产日期" prop="pdate">
@@ -121,7 +121,7 @@
   .form-wrap {
     background-color: #F8F8F8;
     border-radius: 4px;
-    padding: 5px 2%;
+    padding: 10px 2%;
     background-clip: content-box;
   }
 

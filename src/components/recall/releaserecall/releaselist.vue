@@ -100,7 +100,6 @@
 </template>
 
 <script>
-  import {recallDetail} from '../../../config/config'
   export default {
     props: {
       forms: {
@@ -120,7 +119,93 @@
           total: 3
         },
         multipleSelection: this.selectedList,
-        tableData: recallDetail.list
+        tableData: [
+          {
+            id: '00000001',
+            name: '雀巢中小学儿童营养奶粉钙铁锌1kg',
+            vendor: '雀巢公司',
+            system: '跨境电商追溯平台',
+            organization: '首都机场出入境检验检疫局',
+            port: '北京口岸/北京',
+            count: '30/100',
+            pdate: '2015-01-02',
+            idate: '2016-01-01',
+            producer: '雀巢公司',
+            origin: '美国',
+            country: '美国',
+            code: '1234567',
+            ciqcode: '10000001',
+            indate: '2016-01-02',
+          },
+          {
+            id: '00000002',
+            name: '雀巢成人奶粉全脂900g无蔗糖',
+            vendor: '雀巢公司',
+            system: '宁波跨境电商追溯平台',
+            organization: '宁波出入境检验检疫局',
+            port: '浙江口岸/宁波',
+            count: '50/120',
+            pdate: '2016-01-02',
+            idate: '2016-02-01',
+            producer: '雀巢公司',
+            origin: '美国',
+            country: '美国',
+            code: '7654321',
+            ciqcode: '10000002',
+            indate: '2016-03-02'
+          },
+          {
+            id: '00000003',
+            name: '雅培亲体欧洲原罐装进口奶粉3段900g',
+            vendor: '雅培公司',
+            system: '跨境电商追溯平台',
+            organization: '首都机场出入境检验检疫局',
+            port: '北京口岸/北京',
+            count: '30/100',
+            pdate: '2015-03-10',
+            idate: '2016-03-19',
+            producer: '雅培公司',
+            origin: '美国',
+            country: '美国',
+            code: '1234567',
+            ciqcode: '10000001',
+            indate: '2016-03-20'
+          },
+          {
+            id: '00000004',
+            name: '新西兰进口全脂奶粉',
+            vendor: '绿色新西兰集团',
+            system: '跨境电商追溯平台',
+            organization: '首都机场出入境检验检疫局',
+            port: '北京口岸/北京',
+            count: '30/100',
+            pdate: '2015-03-10',
+            idate: '2016-03-19',
+            producer: '绿色新西兰集团',
+            origin: '新西兰',
+            country: '新西兰',
+            code: '1234567',
+            ciqcode: '10000001',
+            indate: '2016-03-20'
+          },
+          {
+            id: '00000005',
+            name: '澳洲进口康培尔conbair山羊奶粉400g儿童',
+            vendor: '康培尔',
+            system: '跨境电商追溯平台',
+            organization: '首都机场出入境检验检疫局',
+            port: '北京口岸/北京',
+            count: '30/100',
+            pdate: '2015-03-10',
+            idate: '2016-03-19',
+            producer: '康培尔',
+            origin: '澳洲',
+            country: '澳洲',
+            code: '1234567',
+            ciqcode: '10000001',
+            indate: '2016-03-20'
+          }
+        ]
       }
     },
     methods: {

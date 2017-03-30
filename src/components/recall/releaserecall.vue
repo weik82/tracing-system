@@ -26,7 +26,7 @@
     data(){
       return {
         form: {
-          name: '12',
+          name: '',
           pdate: '',
           producer: '',
           origin: '',

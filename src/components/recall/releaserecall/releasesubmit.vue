@@ -69,6 +69,7 @@
         if (type == 'form') {
 //          this.$emit('initDate');
           this.$router.push({path:'/home/recallhistory'})
+          return false;
         }
         this.$emit('toggleItem', type);
       },

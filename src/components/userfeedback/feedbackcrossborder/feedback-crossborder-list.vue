@@ -54,7 +54,6 @@
 </template>
 
 <script>
-  import {tradeData1} from '../../../config/config'
   export default {
     props: {
       options: {
@@ -73,7 +72,23 @@
           trade: ''
         },
         option: this.options,
-        tableData: tradeData1
+        tableData: [
+          {
+            trade: '乳与乳制品',
+            aCount: 344571,
+            bCount: 1244
+          },
+          {
+            trade: '酒类',
+            aCount: 344571,
+            bCount: 1244
+          },
+          {
+            trade: '器械行业',
+            aCount: 344571,
+            bCount: 1244
+          }
+        ]
       }
     },
     methods: {

@@ -27,8 +27,6 @@
 
 <script>
   import echarts from 'echarts'
-  import {geoCoordMap, mapData, mapData1} from '../../../../config/config'
-  import {convertData} from '../../../../config/util'
   export default {
     data(){
       return {

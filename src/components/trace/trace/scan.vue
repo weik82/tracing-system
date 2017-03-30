@@ -27,8 +27,6 @@
 
 <script>
   import echarts from 'echarts'
-  import {geoCoordMap, mapData, mapData1} from '../../../config/config'
-  import {convertData} from '../../../config/util'
   export default {
     data(){
       return {
@@ -79,58 +77,7 @@
               }
             }
           },
-          series: [
-            /* {
-             name: '宁波跨境追溯系统',
-             type: 'scatter',
-             coordinateSystem: 'geo',
-             legendHoverLink: false,
-             data: convertData(mapData1),
-             symbolSize: function (val) {
-             return val[2] / 10;
-             },
-             label: {
-             normal: {
-             formatter: '{b}',
-             position: 'right',
-             show: false
-             },
-             emphasis: {
-             show: true
-             }
-             },
-             itemStyle: {
-             normal: {
-             color: '#FFE000'
-             }
-             }
-             },
-             {
-             name: '跨境电商追溯系统',
-             type: 'scatter',
-             coordinateSystem: 'geo',
-             legendHoverLink: false,
-             data: convertData(mapData),
-             symbolSize: function (val) {
-             return val[2] / 10;
-             },
-             label: {
-             normal: {
-             formatter: '{b}',
-             position: 'right',
-             show: false
-             },
-             emphasis: {
-             show: true
-             }
-             },
-             itemStyle: {
-             normal: {
-             color: '#00DEFF'
-             }
-             }
-             }*/
-          ]
+          series: []
         },
         scanPie: {
           color: ['#00DEFF','#FFE000', '#56F04A'],

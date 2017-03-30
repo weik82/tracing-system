@@ -25,7 +25,7 @@
             label="跨境电商追溯系统反馈总数"
             width="280">
             <template scope="scope">
-              <a @click="cellClick(scope.$index,scope.row,$event)" class="cell-click">{{scope.row.aCount}}</a>
+              <a @click="cellClick(scope.$index,scope.row,$event,1)" class="cell-click">{{scope.row.aCount}}</a>
             </template>
           </el-table-column>
           <el-table-column
@@ -33,7 +33,7 @@
             label="宁波跨境追溯系统反馈总数"
             width="280">
             <template scope="scope">
-              <a @click="cellClick(scope.$index,scope.row,$event)" class="cell-click">{{scope.row.bCount}}</a>
+              <a @click="cellClick(scope.$index,scope.row,$event,2)" class="cell-click">{{scope.row.bCount}}</a>
             </template>
           </el-table-column>
           <el-table-column
@@ -53,13 +53,12 @@
       </div>
     </div>
     <div class="ms-pagination" style="padding-top: 4px;">
-      <el-button type="primary" @click="toToggle('chart')">返回1</el-button>
+      <el-button type="primary" @click="toToggle('chart')">返回</el-button>
     </div>
   </div>
 </template>
 
 <script>
-  import {tradeData} from '../../../config/config'
   export default {
     data(){
       return {
@@ -71,16 +70,35 @@
         form: {
           name: ''
         },
-        tableData: tradeData
+        tableData: [
+          {
+            trade: '乳与乳制品',
+            aCount: 344571,
+            bCount: 124447,
+            totalCount: 469018
+          },
+          {
+            trade: '酒类',
+            aCount: 344571,
+            bCount: 124447,
+            totalCount: 469018
+          },
+          {
+            trade: '器械行业',
+            aCount: 344571,
+            bCount: 124447,
+            totalCount: 469018
+          }
+        ]
       }
     },
     methods: {
       toToggle(type){
         this.$emit('toggleItem', type);
       },
-      cellClick(index, row, event){
+      cellClick(index, row, event, id){
         event.preventDefault();
-        this.$router.push({path: '/home/fb_crossborder/1', query: {trade: row.trade}, params: {userId: 123}});
+        this.$router.push({path: '/home/fb_crossborder/' + id, query: {trade: row.trade}, params: {userId: 123}});
         console.log(index, row, event);
 //        this.toToggle('detail');
       }

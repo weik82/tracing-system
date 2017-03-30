@@ -123,7 +123,6 @@
 </template>
 
 <script>
-  import {recallHistory} from '../../../config/config'
   export default {
     data(){
       return {
@@ -136,7 +135,62 @@
           date: [],
           code: ''
         },
-        tableData: recallHistory
+        tableData: [
+          {
+            id: '00000001',
+            date: '2016-01-02',
+            status: '已召回',
+            name: '雀巢',
+            vendor: '雀巢集团',
+            system: '跨境电商追溯平台',
+            organization: '首都机场出入境检验检疫局',
+            port: '北京口岸/北京',
+            count: '30/100',
+            pdate: '2015-01-02',
+            idate: '2016-01-01',
+            ciqcode: '10000001',
+            producer: '雀巢集团',
+            origin: '美国',
+            country: '美国',
+            code: '1234567'
+          },
+          {
+            id: '00000002',
+            date: '2016-03-02',
+            status: '召回中',
+            name: '酸奶',
+            vendor: '蒙牛企业',
+            system: '宁波跨境电商追溯平台',
+            organization: '宁波出入境检验检疫局',
+            port: '浙江口岸/宁波',
+            count: '50/120',
+            pdate: '2016-01-02',
+            idate: '2016-02-01',
+            ciqcode: '10000002',
+            producer: '蒙牛企业',
+            origin: '中国',
+            country: '中国',
+            code: '7654321'
+          },
+          {
+            id: '00000003',
+            date: '2016-03-20',
+            status: '召回失败',
+            name: '鸡蛋',
+            vendor: '正大蛋业',
+            system: '跨境电商追溯平台',
+            organization: '首都机场出入境检验检疫局',
+            port: '北京口岸/北京',
+            count: '30/100',
+            pdate: '2015-03-10',
+            idate: '2016-03-19',
+            ciqcode: '10000001',
+            producer: '正大蛋业',
+            origin: '中国',
+            country: '中国',
+            code: '1234567'
+          }
+        ]
       }
     },
     methods: {

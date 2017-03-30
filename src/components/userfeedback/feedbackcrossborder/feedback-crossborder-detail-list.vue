@@ -58,13 +58,12 @@
       </div>
     </div>
     <div class="ms-pagination" style="padding-top: 4px;">
-      <el-button type="primary" @click="toToggle('list')">返回113</el-button>
+      <el-button type="primary" @click="toToggle('list')">返回</el-button>
     </div>
   </div>
 </template>
 
 <script>
-  import  {tradeDetail} from '../../../config/config'
   export default {
     props: {
       options: {
@@ -80,7 +79,74 @@
           total: 3
         },
         option: this.options,
-        tableData: tradeDetail
+        tableData: [
+          {
+            trade:'乳与乳制品',
+            name: '乳制品1',
+            comment: '味道不错,和上次买的差不多',
+            date: '2017-01-02',
+            address: '上海',
+            system: '跨境电商追溯系统',
+            insCode: 1234554,
+            id: '000001',
+            tag: 0
+          },
+          {
+            trade:'乳与乳制品',
+            name: '乳制品2',
+            comment: '味道不错,和上次买的差不多',
+            date: '2017-01-02',
+            address: '上海',
+            system: '跨境电商追溯系统',
+            insCode: 1234554,
+            id: '000002',
+            tag: 0
+          },
+          {
+            trade:'酒类',
+            name: '酒类1',
+            comment: '味道不错,和上次买的差不多',
+            date: '2017-02-02',
+            address: '北京',
+            system: '跨境电商追溯系统',
+            insCode: 12563351,
+            id: '000002',
+            tag: 0
+          },
+          {
+            trade:'酒类',
+            name: '酒类2',
+            comment: '味道不好,有异味,差评',
+            date: '2017-03-02',
+            address: '上海',
+            system: '跨境电商追溯系统',
+            insCode: 14533663,
+            id: '000003',
+            tag: 1
+          },
+          {
+            trade: '器械行业',
+            name: '器械行业1',
+            comment: '味道不好,有异味,差评',
+            date: '2017-03-02',
+            address: '上海',
+            system: '跨境电商追溯系统',
+            insCode: 14533663,
+            id: '000003',
+            tag: 1
+          },
+          {
+            trade: '器械行业',
+            name: '器械行业2',
+            comment: '味道不好,有异味,差评',
+            date: '2017-03-02',
+            address: '上海',
+            system: '跨境电商追溯系统',
+            insCode: 14533663,
+            id: '000003',
+            tag: 1
+          }
+        ]
       }
     },
     methods: {

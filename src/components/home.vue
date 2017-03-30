@@ -15,6 +15,7 @@
           <template slot="title"><span class="opened-title">用户反馈情况</span></template>
           <el-menu-item index="/home/fb_total">全网跨境电商追溯系统</el-menu-item>
           <el-menu-item index="/home/fb_crossborder/1">跨境电商追溯系统</el-menu-item>
+          <el-menu-item index="/home/fb_crossborder/2">宁波跨境追溯系统</el-menu-item>
         </el-submenu>
         <el-submenu index="3">
           <template slot="title"><span class="opened-title">商品召回系统</span></template>
@@ -28,7 +29,9 @@
         <router-view></router-view>
       </transition>
     </div>
-    <div class="ms-footer"></div>
+    <div class="ms-footer">
+      国家跨境电子商务质量安全风险监测网
+    </div>
   </div>
 </template>
 
@@ -42,6 +45,11 @@
     methods: {
       selectedItem(index){
         console.log(index);
+        /*if (index == this.$route.path) {
+          this.$router.go({path: index});
+        } else {
+          this.$router.push({path: index})
+        }*/
       }
     },
     computed: {
@@ -110,7 +118,11 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: #42b983;
+    background: #444;
+    color: #efefef;
+    text-align: center;
+    line-height: 24px;
+    font-size: 14px;
   }
 
   .is-opened {

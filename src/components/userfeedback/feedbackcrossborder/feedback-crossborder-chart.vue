@@ -15,11 +15,11 @@
         <div class="chart">
           <div class="up-detail">
             <p>反馈总数</p>
-            <p class="ms-detail-count">34252435</p>
+            <p class="ms-detail-count">{{count.totalCount}}</p>
           </div>
           <div class="up-detail">
             <p>差评数</p>
-            <p class="ms-detail-count bad-count">34252</p>
+            <p class="ms-detail-count bad-count">{{count.badCount}}</p>
           </div>
         </div>
       </div>
@@ -46,6 +46,10 @@
   export default {
     data(){
       return {
+        count: {
+          totalCount: 34252435,
+          badCount: 34252
+        },
         date: '',
         mapChart: null,
         pieChart: null,
@@ -98,31 +102,6 @@
               type: 'scatter',
               coordinateSystem: 'geo',
               legendHoverLink: false,
-              data: convertData(mapData1),
-              symbolSize: function (val) {
-                return val[2] / 10;
-              },
-              label: {
-                normal: {
-                  formatter: '{b}',
-                  position: 'right',
-                  show: false
-                },
-                emphasis: {
-                  show: true
-                }
-              },
-              itemStyle: {
-                normal: {
-                  color: '#FF6E00'
-                }
-              }
-            },
-            {
-              name: '用户差评反馈',
-              type: 'scatter',
-              coordinateSystem: 'geo',
-              legendHoverLink: false,
               data: convertData(mapData),
               symbolSize: function (val) {
                 return val[2] / 10;
@@ -140,6 +119,31 @@
               itemStyle: {
                 normal: {
                   color: '#00C1FF'
+                }
+              }
+            },
+            {
+              name: '用户差评反馈',
+              type: 'scatter',
+              coordinateSystem: 'geo',
+              legendHoverLink: false,
+              data: convertData(mapData1),
+              symbolSize: function (val) {
+                return val[2] / 10;
+              },
+              label: {
+                normal: {
+                  formatter: '{b}',
+                  position: 'right',
+                  show: false
+                },
+                emphasis: {
+                  show: true
+                }
+              },
+              itemStyle: {
+                normal: {
+                  color: '#FF6E00'
                 }
               }
             }
@@ -237,7 +241,7 @@
         this.$emit('toggleItem', type);
       },
       initMap(){
-        this.axios.get(location.origin+'/static/json/china.json').then((res) => {
+        this.axios.get(location.origin + '/static/json/china.json').then((res) => {
           if (res.status == 200) {
             echarts.registerMap('china', res.data);
             this.mapChart = echarts.init(document.getElementById('map'));
@@ -252,6 +256,19 @@
       initLine(){
         this.lineChart = echarts.init(document.getElementById('scanline'));
         this.lineChart.setOption(this.feedbackline);
+      }
+    },
+    watch: {
+      '$route' (to, from) {
+        let id = to.params.id;
+        if (id == 1) {
+          this.count.totalCount = 34252435;
+          this.count.badCount = 34252;
+        } else if (id == 2) {
+          this.count.totalCount = 3425245;
+          this.count.badCount = 3425;
+        }
+
       }
     },
     mounted(){

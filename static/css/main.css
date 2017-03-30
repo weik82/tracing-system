@@ -24,7 +24,9 @@ a {
 .is-opened .el-submenu__title:hover {
   background-color: #20AEFC !important;
 }
-
+.is-active .el-submenu__icon-arrow{
+  color: #ffffff;
+}
 .el-scrollbar__wrap {
   overflow-x: hidden !important;
 }
@@ -36,7 +38,9 @@ a {
 .el-table .info-row {
   color: #F55C17 !important;
 }
-
+.el-submenu .el-menu{
+  background-color: #f6f6f6;
+}
 .el-submenu .el-menu-item {
   height: 45px !important;
   line-height: 45px !important;
