@@ -32,7 +32,7 @@
     </div>
     <div class="ms-table content-wrap">
       <div class="content-header">
-        <span class="content-header-title">企业信息列表</span>
+        <span class="content-header-title">全网企业信息列表</span>
         <div class="content-header-form">
           <el-input placeholder="请输入企业名称" v-model="config.vendorName" style="width: 280px;">
             <el-button slot="append" icon="search" @click="searchList">搜索</el-button>

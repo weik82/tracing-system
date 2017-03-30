@@ -50,6 +50,17 @@
         this.isActive = _query.isActive;
       }
     },
+ /*   watch: {
+      '$route' (to, from) {
+        let _platformId = to.params.id;
+        console.log(_platformId+'router');
+        this.$router.replace({path: '/home/crossborder/' + _platformId});
+        /!*this.platformId = to.params.id;
+         this.getCountData();
+         this.getProvinceData();
+         this.getGeoData();*!/
+      }
+    },*/
     mounted(){
     }
   }

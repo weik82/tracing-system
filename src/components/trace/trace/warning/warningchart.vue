@@ -11,12 +11,12 @@
     </div>
     <div class="ms-right-detail ms-r-detail">
       <div class="ms-detail-up">
-        <p class="ms-detail-title">全网扫码统计(次)</p>
+        <p class="ms-detail-title">全网异常预警统计(次)</p>
         <p class="ms-detail-count warn">{{warnTotal}}<span class="arrow-more" @click="toToggle(2)">>></span></p>
         <div id="warnpie" class="chart"></div>
       </div>
       <div class="ms-detail-down">
-        <p class="ms-detail-title" style="padding-top: 10px">全网各省扫码统计(次)</p>
+        <p class="ms-detail-title" style="padding-top: 10px">全网各省异常预警统计(次)</p>
         <div class="chart" style="overflow-y: scroll">
           <div id="warnbar" style="width: 100%;height: 125%"></div>
         </div>

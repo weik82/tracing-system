@@ -194,115 +194,111 @@
       getCountData(){
         this.axios.post('/statistics/getcountdata', {
           platformid: this.platformId
+        }).then((res) => {
+          if (res.status == 200) {
+            this.detailInfo = res.data;
+            this.detailInfo.name = '全国';
+          }
         })
-          .then((res) => {
-            if (res.status == 200) {
-              this.detailInfo = res.data;
-              this.detailInfo.name = '全国';
-            }
-          })
       },//获取全国系统信息
       getProvinceData(){
         this.axios.post('/statistics/getprovincedata', {
           platformid: this.platformId
+        }).then((res) => {
+          if (res.status == 200) {
+            res.data.forEach((item) => {
+              this.options.push({label: item, value: item})
+            })
+          }
         })
-          .then((res) => {
-            if (res.status == 200) {
-              res.data.forEach((item) => {
-                this.options.push({label: item, value: item})
-              })
-            }
-          })
       },//获取下拉省份信息
       getGeoData(){
         this.axios.post('/statistics/getgeodata', {
           platformid: this.platformId
-        })
-          .then((res) => {
-            if (res.status == 200) {
-              let _series = [], _legendData = [], _data = res.data;
+        }).then((res) => {
+          if (res.status == 200) {
+            let _series = [], _legendData = [], _data = res.data;
+            _series.push({
+              name: '省份',
+              type: 'map',
+              map: 'china',
+              itemStyle: {
+                normal: {
+                  areaColor: '#ffffff',
+                  borderColor: '#D1D1D1',
+                  borderWidth: 2
+                },
+                emphasis: {
+                  areaColor: '#20c3ff',
+                  borderWidth: 2
+                }
+              },
+              top: '5%',
+              bottom: '5%',
+              right: '10%',
+              left: '10%',
+              label: {normal: {show: false}, emphasis: {show: false}},
+              data: _data.provstaticdata
+            });
+            let locateData = _data.systemallocatedata;
+            locateData.forEach((item) => {
+              let _arr = [], _popCity = [];
+              item.data.forEach((sitem) => {
+                _arr.push({
+                  name: sitem.city,
+                  value: geoCoordMap[sitem.city],
+                });
+                _popCity.push(sitem.city);
+              });
+              this.popInfo.popCity = _popCity;
+              _legendData.push({
+                name: item.platform,
+                icon: 'image://static/image/icon' + item.sysid + '.png'
+              });
               _series.push({
-                name: '省份',
-                type: 'map',
-                map: 'china',
-                itemStyle: {
+                name: item.platform,
+                type: 'scatter',
+                coordinateSystem: 'geo',
+                symbolSize: [27, 36],
+                symbolOffset: [0, '-50%'],
+                symbol: 'image://static/image/icon' + item.sysid + '.png',
+                data: _arr,
+                label: {
                   normal: {
-                    areaColor: '#ffffff',
-                    borderColor: '#D1D1D1',
-                    borderWidth: 2
+                    formatter: '{b}',
+                    position: 'right',
+                    show: false
                   },
                   emphasis: {
-                    areaColor: '#20c3ff',
-                    borderWidth: 2
+                    show: false
                   }
                 },
-                top: '5%',
-                bottom: '5%',
-                right: '10%',
-                left: '10%',
-                label: {normal: {show: false}, emphasis: {show: false}},
-                data: _data.provstaticdata
-              });
-              let locateData = _data.systemallocatedata;
-              locateData.forEach((item) => {
-                let _arr = [], _popCity = [];
-                item.data.forEach((sitem) => {
-                  _arr.push({
-                    name: sitem.city,
-                    value: geoCoordMap[sitem.city],
-                  });
-                  _popCity.push(sitem.city);
-                });
-                this.popInfo.popCity = _popCity;
-                _legendData.push({
-                  name: item.platform,
-                  icon: 'image://static/image/icon' + item.sysid + '.png'
-                });
-                _series.push({
-                  name: item.platform,
-                  type: 'scatter',
-                  coordinateSystem: 'geo',
-                  symbolSize: [27, 36],
-                  symbolOffset: [0, '-50%'],
-                  symbol: 'image://static/image/icon' + item.sysid + '.png',
-                  data: _arr,
-                  label: {
-                    normal: {
-                      formatter: '{b}',
-                      position: 'right',
-                      show: false
-                    },
-                    emphasis: {
-                      show: false
-                    }
-                  },
-                  itemStyle: {
-                    normal: {
-                      color: '#F06C00'
-                    }
+                itemStyle: {
+                  normal: {
+                    color: '#F06C00'
                   }
-                });
+                }
               });
-              this.china.legend.data = _legendData;
-              this.china.series = _series;
-              this.initChinaMap();
-            }
-          })
+            });
+            this.china.legend.data = _legendData;
+            this.china.series = _series;
+            this.initChinaMap();
+          }
+        })
       },//获取全国地图信息
       getProvinceGeoData(province){
         this.popInfo.showPop = false;
         this.axios.post('/statistics/getgeodata', {
           province: province,
           platformid: this.platformId
+        }).then((res) => {
+          if (res.status == 200) {
+            let _data = res.data,
+              locateData = _data.systemallocatedata;
+            this.detailInfo = _data.provstaticdata[0];
+            this.initProvinceMap(province, locateData);
+          }
         })
-          .then((res) => {
-            if (res.status == 200) {
-              let _data = res.data,
-                locateData = _data.systemallocatedata;
-              this.detailInfo = _data.provstaticdata[0];
-              this.initProvinceMap(province, locateData);
-            }
-          })
       },//获取省份地图信息
       timeoutPop(){
         let vm = this;
@@ -414,14 +410,14 @@
             this.province.legend.data = _legendData;
             this.province.series = _series;
             this.chinaChart.setOption(this.province);
-            let vm = this;
-            this.chinaChart.on('click', function (p) {
-              console.log(p);
-              let _sysid = p.data.sysid;
-              if (p.seriesType == 'scatter') {
-                vm.$router.push({path: '/home/crossborder/' + _sysid, query: {isActive: 2}});
-              }
-            })
+            /* let vm = this;
+             this.chinaChart.on('click', function (p) {
+             console.log(p);
+             let _sysid = p.data.sysid;
+             if (p.seriesType == 'scatter') {
+             vm.$router.push({path: '/home/crossborder/' + _sysid, query: {isActive: 2}});
+             }
+             })*/
           }
         });
       },//初始化省份地图
@@ -437,6 +433,14 @@
     created(){
       console.log(this.$route.params.id);
     },
+    /*watch: {
+      '$route' (to, from) {
+        this.platformId = to.params.id;
+        this.getCountData();
+        this.getProvinceData();
+        this.getGeoData();
+      }
+    },*/
     mounted(){
       this.$nextTick(function () {
         this.getCountData();

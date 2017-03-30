@@ -55,7 +55,7 @@
         },
         value: 'china',
         options: [
-          {label: '全国', value: 'china'}
+          {label: '全网', value: 'china'}
         ],//下拉框选项
         chinaChart: null,
         china: {
@@ -190,8 +190,8 @@
       }
     },
     methods: {
-      getCountData(obj){
-        this.axios.post('/statistics/getcountdata', obj)
+      getCountData(){
+        this.axios.post('/statistics/getcountdata', {})
           .then((res) => {
             if (res.status == 200) {
               this.detailInfo = res.data;
@@ -284,6 +284,7 @@
       },//获取全国地图信息
       getProvinceGeoData(province){
         this.popInfo.showPop = false;
+        clearTimeout(this.timeout);
         this.axios.post('/statistics/getgeodata', {province: province})
           .then((res) => {
             if (res.status == 200) {
@@ -301,10 +302,10 @@
             coordSys = seriesModel.coordinateSystem,
             _len = vm.popInfo.popCity.length,
             _randomIndex = Math.floor(Math.random() * _len),
-            point = coordSys.dataToPoint(geoCoordMap['北京']), _tpyeId = 1;
+            point = coordSys.dataToPoint(geoCoordMap[vm.popInfo.popCity[_randomIndex]]), _tpyeId = 1;
           _tpyeId = Math.random() > 0.5 ? 2 : 1;
           let arr = [{typeId: _tpyeId, position: point}];
-          vm.popInfo.popItems.push(...arr);
+          vm.popInfo.popItems = arr;
           vm.popInfo.showPop = true;
           if (_tpyeId == 1) {
             vm.detailInfo.vendorcount += Math.floor(Math.random() * 5);
@@ -341,7 +342,6 @@
         _province = provinceMap[_province];
         this.axios.get(location.origin + '/static/json/province/' + _province + '.json').then((res) => {
           if (res.status == 200) {
-            clearTimeout(this.timeout);
             echarts.registerMap(_province, res.data);
             this.chinaChart && this.chinaChart.dispose && this.chinaChart.dispose();
             this.chinaChart = echarts.init(document.getElementById('map'));
@@ -416,7 +416,6 @@
         });
       },//初始化省份地图
       provinceChange(v){
-        console.log('change' + v);
         if (v == 'china') {
           this.getCountData({});
           this.getGeoData();
@@ -427,9 +426,9 @@
     },
     mounted(){
       this.$nextTick(function () {
-        this.getCountData({});
+        this.getCountData();
         this.getProvinceData();
-        this.getGeoData({});
+        this.getGeoData();
       })
     }
   }

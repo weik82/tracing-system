@@ -38,7 +38,7 @@
         pieChart: null,
         barChart: null,
         scanMap: {
-          color: ['#FFE000', '#00DEFF'],
+          color: ['#00DEFF','#FFE000', '#56F04A'],
           title: {
             text: '全网用户反馈分布图',
             left: 'left',
@@ -133,7 +133,7 @@
           ]
         },
         scanPie: {
-          color: ['#FFE000','#00DEFF', '#56F04A'],
+          color: ['#00DEFF','#FFE000', '#56F04A'],
           tooltip: {
             trigger: 'item',
             formatter: "{a} <br/>{b} : {c} ({d}%)",
@@ -175,7 +175,7 @@
           ]
         },
         scanBar: {
-          color: ['#FFE000','#00DEFF', '#56F04A'],
+          color: ['#00DEFF','#FFE000', '#56F04A'],
           tooltip: {
             trigger: 'axis',
             axisPointer: {

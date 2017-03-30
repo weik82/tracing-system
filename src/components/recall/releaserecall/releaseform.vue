@@ -83,8 +83,8 @@
         form: this.forms,
         rules: {
           name: [
-            {required: true, message: '请输入商品名称', trigger: 'blur'},
-            {min: 3, max: 50, message: '长度在3到30个字符', trigger: 'blur'}
+            {required: true, message: '请输入商品名称', trigger: 'blur'}
+//            {min: 3, max: 50, message: '长度在3到30个字符', trigger: 'blur'}
           ]
         }
       }

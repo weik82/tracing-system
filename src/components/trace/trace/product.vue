@@ -31,7 +31,7 @@
     </div>
     <div class="ms-down-table content-wrap">
       <div class="content-header">
-        <span class="content-header-title">商品信息列表</span>
+        <span class="content-header-title">全网商品信息列表</span>
         <div class="content-header-form">
           <el-input placeholder="请输入商品名称" v-model="config.productName" style="width: 240px;">
             <el-button slot="append" icon="search" @click="searchList">搜索</el-button>

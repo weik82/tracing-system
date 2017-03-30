@@ -67,7 +67,8 @@
     methods: {
       toToggle(type){
         if (type == 'form') {
-          this.$emit('initDate');
+//          this.$emit('initDate');
+          this.$router.push({path:'/home/recallhistory'})
         }
         this.$emit('toggleItem', type);
       },

@@ -1,30 +1,31 @@
 <template>
   <div class="ms-main ms-main-scroll">
-    <div class="ms-up-chart content-wrap" :style="{height:(chartStatus?'50':'250')+'px'}">
+    <div class="ms-up-chart content-wrap" :style="{height:(config.chartStatus?'50':'250')+'px'}">
       <div class="content-header" style="padding: 0">
         <span class="content-header-title">系统企业备案时间分布统计</span>
         <div class="content-header-form">
-          <el-select v-model="chartType" placeholder="请选择" style="width: 100px;margin: 0 10px">
+          <el-select v-model="config.chartType" disabled placeholder="请选择" style="width: 100px;margin: 0 10px">
             <el-option
-              v-for="item in options"
+              v-for="item in config.options"
               :label="item.label"
               :value="item.value"
               :key="item.value">
             </el-option>
           </el-select>
           <el-date-picker
-            v-model="date"
+            v-model="config.date"
             type="daterange"
             :editable="false"
-            placeholder="选择日期范围" style="width: 200px;margin: 0 10px">
+            placeholder="选择日期范围" style="width: 220px;margin: 0 10px">
           </el-date-picker>
-          <span :class="{'is-circle-checked':circleChecked=='day'}" @click="circleChecked='day'" class="circle-checked">天</span>
-          <span :class="{'is-circle-checked':circleChecked=='week'}" @click="circleChecked='week'"
+          <span :class="{'is-circle-checked':config.circleChecked=='day'}" @click="searchChart('day')"
+                class="circle-checked">天</span>
+          <span :class="{'is-circle-checked':config.circleChecked=='week'}" @click="searchChart('week')"
                 class="circle-checked">周</span>
-          <span :class="{'is-circle-checked':circleChecked=='month'}" @click="circleChecked='month'"
+          <span :class="{'is-circle-checked':config.circleChecked=='month'}" @click="searchChart('month')"
                 class="circle-checked">月</span>
-          <i class="el-icon-caret-top el-icon-caret-top1" :class="{'el-icon-caret-bottom':chartStatus}"
-             @click="chartStatus=!chartStatus;"></i>
+          <i class="el-icon-caret-top el-icon-caret-top1" :class="{'el-icon-caret-bottom':config.chartStatus}"
+             @click="config.chartStatus=!config.chartStatus;"></i>
         </div>
       </div>
       <div style="width: 100%;height:calc(100% - 40px)" id="chart"></div>
@@ -33,30 +34,54 @@
       <div class="content-header">
         <span class="content-header-title">系统企业信息列表</span>
         <div class="content-header-form">
-          <el-input placeholder="请输入企业名称" v-model="vendorName" style="width: 240px;">
-            <el-button slot="append" icon="search" @click="search">搜索</el-button>
+          <el-input placeholder="请输入企业名称" v-model="config.vendorName" style="width: 280px;">
+            <el-button slot="append" icon="search" @click="searchList">搜索</el-button>
           </el-input>
         </div>
       </div>
-      <el-table :data="tableData" style="width: 100%;">
+      <el-table class="space-nowrap" highlight-current-row :data="vendorData" style="width: 100%;" height="405">
         <el-table-column
-          prop="date"
-          label="日期"
+          prop="vendorname"
+          label="企业名称">
+        </el-table-column>
+        <el-table-column
+          prop="gov"
+          label="所属机构"
           width="180">
         </el-table-column>
         <el-table-column
-          prop="name"
-          label="姓名"
+          label="商品行业数/商品备案数"
           width="180">
+          <template scope="scope">
+            <span>{{ scope.row.categorycnt + ' / ' + scope.row.productcnt}}</span>
+          </template>
         </el-table-column>
         <el-table-column
-          prop="address"
-          label="地址">
+          label="报检次数/报检商品数"
+          width="180">
+          <template scope="scope">
+            <span>{{ scope.row.inspectcnt + ' / ' + scope.row.tagcnt}}</span>
+          </template>
+        </el-table-column>
+        <el-table-column
+          prop="importgate"
+          label="报关口岸"
+          width="120">
+        </el-table-column>
+        <el-table-column
+          prop="province"
+          label="所在省份"
+          width="100">
+        </el-table-column>
+        <el-table-column
+          prop="createtimestr"
+          label="备案时间"
+          width="120">
         </el-table-column>
       </el-table>
       <div class="ms-pagination">
         <el-pagination
-          @current-change=""
+          @current-change="getVendorList"
           :current-page="config.currentPage"
           :page-size="config.pageSize"
           layout="total, prev, pager, next, jumper"
@@ -72,30 +97,30 @@
   export default {
     data(){
       return {
+        platformId: this.$route.params.id,
         config: {
           currentPage: 1,
           pageSize: 10,
-          total: 3
+          total: 3,
+          chartStatus: false,
+          circleChecked: 'day',
+          chartType: '折线',
+          vendorName: '',
+          date: [],
+          options: [
+            {label: '折线', value: '折线'},
+            {label: '饼图', value: '饼图'}
+          ]
         },
-        chartStatus: false,
-        circleChecked: 'day',
-        chartType: '折线',
-        vendorName: '',
-        date: [],
-        options: [
-          {label: '折线', value: '折线'},
-          {label: '饼图', value: '饼图'}
-        ],
         chart: null,
         chartOption: {
-          backgroundColor: '#fff',
           tooltip: {
             trigger: 'axis'
           },
           xAxis: {
             type: 'category',
             boundaryGap: false,
-            data: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月']
+            data: []
           },
           grid: {
             left: '5%',
@@ -108,80 +133,102 @@
           },
           series: [
             {
-              name: '数量',
+              name: '企业数量',
               type: 'line',
               smooth: true,
-              data: [12, 11, 15, 13, 12, 13, 10, 12, 11, 15, 13, 12, 13]
-
+              data: []
             }
           ]
         },
-        tableData: [
-          {
-            date: '2016-05-02',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1518 弄'
-          },
-          {
-            date: '2016-05-04',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1517 弄'
-          },
-          {
-            date: '2016-05-01',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1519 弄'
-          },
-          {
-            date: '2016-05-03',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1516 弄'
-          },
-          {
-            date: '2016-05-04',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1517 弄'
-          },
-          {
-            date: '2016-05-01',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1519 弄'
-          },
-          {
-            date: '2016-05-03',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1516 弄'
-          },
-          {
-            date: '2016-05-04',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1517 弄'
-          },
-          {
-            date: '2016-05-01',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1519 弄'
-          },
-          {
-            date: '2016-05-03',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1516 弄'
-          }
-        ]
+        vendorData: []
       }
     },
     methods: {
+      getVendorByDate(){
+        let _data = {
+          starttime: this.submitDate[0],
+          endtime: this.submitDate[1],
+          platformid: this.platformId
+        };
+        this.axios.post('/statistics/getvendordatabydate ', _data)
+          .then((res) => {
+            if (res.status == 200) {
+              let _data = res.data, _xAxis = [], _yAxis = [];
+              _data.forEach((item) => {
+                _xAxis.push(item.date);
+                _yAxis.push(item.count)
+              });
+              this.chartOption.xAxis.data = _xAxis;
+              this.chartOption.series[0].data = _yAxis;
+              this.initChart();
+            }
+          })
+      },//图表数据
+      getVendorList(currentpage){
+        let _data = {
+          starttime: this.submitDate[0],
+          endtime: this.submitDate[1],
+          vendorname: this.config.vendorName,
+          pageflag: 1,
+          currentpage: currentpage - 1,
+          pagesize: this.config.pageSize,
+          platformid: this.platformId
+        };
+        this.axios.post('/statistics/getvendordatalist', _data)
+          .then((res) => {
+            if (res.status == 200 && res.data.result == 0) {
+              this.vendorData = res.data.data;
+              this.config.total = res.data.totalnum;
+            } else {
+              this.vendorData = [];
+              this.config.total = 0;
+            }
+          })
+      },//列表数据
       initChart(){
+        this.chart && this.chart.dispose && this.chart.dispose();
         this.chart = echarts.init(document.getElementById('chart'));
         this.chart.setOption(this.chartOption);
       },
-      search(){
-        alert(this.vendorName);
+      searchList(){
+        this.config.currentPage = 1;
+        this.getVendorList(1);
+      },
+      searchChart(flag){
+        this.config.circleChecked = flag;
+        this.getVendorByDate();
       }
     },
+    created(){
+      let _sTime = new Date(), _eTime = new Date();
+      _sTime.setMonth(_sTime.getMonth() - 6);
+      this.config.date = [_sTime, _eTime];
+    },
+    computed: {
+      submitDate(){
+        let addZero = function (m) {
+          return m < 10 ? '0' + m : m;
+        };
+        let dateFormat = function (time) {
+          let y = time.getFullYear();
+          let m = time.getMonth() + 1;
+          let d = time.getDate();
+          return y + '-' + addZero(m) + '-' + addZero(d);
+        };
+        return [dateFormat(this.config.date[0]), dateFormat(this.config.date[1])]
+      }
+    },
+   /* watch: {
+      '$route' (to, from) {
+        this.platformId = to.params.id;
+        this.getVendorByDate();
+        this.getVendorList(1);
+      }
+    },*/
     mounted(){
       this.$nextTick(function () {
-        this.initChart()
+        this.getVendorByDate();
+        this.getVendorList(1);
       })
     }
   }
