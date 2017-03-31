@@ -25,7 +25,7 @@
     methods: {
       downloadFile(){
         this.axios.get(this.url).then((res) => {
-          var _blob = new Blob([JSON.stringify(res.data)], {type: this.contentType});
+          let _blob = new Blob([JSON.stringify(res.data)], {type: this.contentType});
           if (window.navigator.msSaveBlob) {
             window.navigator.msSaveBlob(_blob, this.fileName);
             return false;

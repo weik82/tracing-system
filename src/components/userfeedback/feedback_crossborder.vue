@@ -37,12 +37,16 @@
     },
     created(){
       let _route = this.$route.query;
-      console.log(this.$route);
       if (_route.trade) {
         this.option.trade = _route.trade;
         this.feedbackType = 'detail';
       }
 
+    },
+    watch: {
+      '$route' (to, from) {
+        this.feedbackType = 'chart';
+      }
     },
     mounted(){
       this.$nextTick(function () {

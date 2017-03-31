@@ -268,7 +268,6 @@
           this.count.totalCount = 3425245;
           this.count.badCount = 3425;
         }
-
       }
     },
     mounted(){

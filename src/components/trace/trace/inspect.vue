@@ -98,6 +98,7 @@
           layout="total, prev, pager, next, jumper"
           :total="config.total">
         </el-pagination>
+        <span class="down-excel">导出excel</span>
       </div>
     </div>
   </div>

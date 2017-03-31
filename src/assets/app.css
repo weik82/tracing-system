@@ -68,6 +68,7 @@
   width: 100%;
   text-align: center;
   padding-top: 5px;
+  position: relative;
 }
 
 /*商品 报检 企业 右侧*/
@@ -186,4 +187,13 @@
 .main-header > .content-header-form {
   display: flex;
   align-items: center;
+}
+.down-excel {
+  color: #008CF2;
+  text-decoration: underline;
+  cursor: pointer;
+  position: absolute;
+  right: 10px;
+  line-height: 40px;
+  top: 0;
 }

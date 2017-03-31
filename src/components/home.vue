@@ -5,7 +5,8 @@
       <div class="title">全国跨境电商追溯平台</div>
     </div>
     <div class="ms-sidebar">
-      <el-menu :default-active="onRoutes" @select="selectedItem" class="el-menu-vertical-demo" unique-opened router>
+      <el-menu :default-active="onRoutes" @select="selectedItem" class="el-menu-vertical-demo" unique-opened>
+        <!--router-->
         <el-submenu index="1">
           <template slot="title"><span class="opened-title">全网跨境电商追溯系统</span></template>
           <el-menu-item index="/home/trace">全网跨境电商追溯系统</el-menu-item>
@@ -45,11 +46,11 @@
     methods: {
       selectedItem(index){
         console.log(index);
-        /*if (index == this.$route.path) {
-          this.$router.go({path: index});
+        if (index == this.$route.path) {
+          this.$router.replace({path: index, reload: true, query: {reload: new Date().getTime()}});
         } else {
           this.$router.push({path: index})
-        }*/
+        }
       }
     },
     computed: {
