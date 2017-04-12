@@ -6,8 +6,8 @@ import Router from 'vue-router'
 Vue.use(Router);
 
 // 页面刷新时，重新赋值token
-if (window.localStorage.getItem('token')) {
-  store.commit(types.USER_LOGIN, {token: window.localStorage.getItem('token')})
+if (window.localStorage.getItem('ts_token')) {
+  store.commit(types.USER_LOGIN, {token: window.localStorage.getItem('ts_token')})
 }
 const router = new Router({
   routes: [
@@ -41,6 +41,10 @@ const router = new Router({
         {
           path: 'crossborder/:id',//跨境电商追溯系统
           component: resolve => require(['../components/trace/crossbordertrace.vue'], resolve),
+        },
+        {
+          path: 'progressing',//跨境电商追溯系统
+          component: resolve => require(['../components/progressing.vue'], resolve),
         },
         {
           path: 'fb_total',//用户反馈(全网)

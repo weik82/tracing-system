@@ -43,6 +43,11 @@
         this.isActive = index;
       }
     },
+    watch: {
+      '$route'(to, from){
+        this.isActive = 1;
+      }
+    },
     mounted(){
     }
   }

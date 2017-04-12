@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    404 NotFound
+    未接入...
   </div>
 </template>
 

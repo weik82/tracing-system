@@ -7,10 +7,10 @@
           <input class="form-input" v-model="form.username" type="text" placeholder="请输入用户名">
         </div>
         <div class="password login-item">
-          <input class="form-input" v-model="form.password" type="text" placeholder="请输入密码">
+          <input class="form-input" v-model="form.password" type="password" placeholder="请输入密码">
         </div>
         <div class="login-check login-item">
-          <input type="checkbox" id="auto-login">
+          <input type="checkbox" id="auto-login" v-model="autoLogin">
           <label for="auto-login">下次自动登录</label>
         </div>
         <div class="login-btn login-item">
@@ -18,6 +18,12 @@
         </div>
       </div>
     </div>
+    <el-dialog title="提示" v-model="dialogVisible" size="tiny">
+      <span>用户名或密码错误!</span>
+      <span slot="footer" class="dialog-footer">
+        <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 
@@ -26,21 +32,49 @@
   export default {
     data(){
       return {
+        autoLogin: false,
+        dialogVisible: false,
         form: {
           username: '',
           password: ''
         }
       }
     },
+    created(){
+      if (window.localStorage.getItem('auto_login')) {
+        this.autoLogin = true;
+        this.form.username = window.localStorage.getItem('ts_username');
+        this.form.password = window.localStorage.getItem('ts_password');
+      }
+    },
     methods: {
       submitForm() {
-        this.$store.commit(types.USER_LOGIN, {token: '1234567'});
-        window.localStorage.setItem('token', '1234567');
+        console.log('submit');
+        if (this.form.username != 'admin' || this.form.password != 'admin') {
+          this.dialogVisible = true;
+          return false;
+        }
+        this.$store.commit(types.USER_LOGIN, {token: 'true'});
+        window.localStorage.setItem('ts_token', 'true');
+        window.localStorage.setItem('ts_login_status', 1);
+        if (this.autoLogin == true) {
+          window.localStorage.setItem('ts_username', this.form.username);
+          window.localStorage.setItem('ts_password', this.form.password);
+          window.localStorage.setItem('auto_login', true);
+        } else {
+          window.localStorage.removeItem('auto_login');
+          window.localStorage.removeItem('ts_username');
+          window.localStorage.removeItem('ts_password');
+        }
         let redirect = decodeURIComponent(this.$route.query.redirect || '/home');
         this.$router.push({path: redirect});
       }
+    },
+    mounted(){
+      if (this.autoLogin && window.localStorage.getItem('ts_login_status') == 1) {
+        this.submitForm();
+      }
     }
-
   }
 </script>
 <style scoped>

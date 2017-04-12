@@ -5,7 +5,8 @@ import router from '../router/route'
 import {Loading} from 'element-ui';
 // axios 配置
 axios.defaults.timeout = 5000;
-axios.defaults.baseURL = 'http://10.12.0.96:8080/v2';
+axios.defaults.baseURL = 'http://cadw.ciqca.com/CADataPlatform/v2';
+// axios.defaults.baseURL = 'http://10.12.0.96:8080/v2';
 // axios.defaults.headers.common['Authorization'] = `token ${token}`;
 // axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 let loadingInstance,

@@ -2,21 +2,22 @@
   <div class="home">
     <div class="ms-header">
       <div class="logo">国家跨境电子商务质量安全风险监测网</div>
-      <div class="title">全国跨境电商追溯平台</div>
+      <div class="title">进出口追溯平台 <span class="exit" @click="exitLogin">退出</span></div>
     </div>
     <div class="ms-sidebar">
       <el-menu :default-active="onRoutes" @select="selectedItem" class="el-menu-vertical-demo" unique-opened>
         <!--router-->
         <el-submenu index="1">
-          <template slot="title"><span class="opened-title">全网跨境电商追溯系统</span></template>
-          <el-menu-item index="/home/trace">全网跨境电商追溯系统</el-menu-item>
-          <el-menu-item index="/home/crossborder/1">跨境电商追溯系统</el-menu-item>
+          <template slot="title"><span class="opened-title">全网追溯系统</span></template>
+          <el-menu-item index="/home/trace">全网追溯系统</el-menu-item>
+          <el-menu-item index="/home/crossborder/1">进出口产品追溯监管系统</el-menu-item>
+          <el-menu-item index="/home/progressing">宁波进口商品溯源系统</el-menu-item>
         </el-submenu>
         <el-submenu index="2">
           <template slot="title"><span class="opened-title">用户反馈情况</span></template>
-          <el-menu-item index="/home/fb_total">全网跨境电商追溯系统</el-menu-item>
-          <el-menu-item index="/home/fb_crossborder/1">跨境电商追溯系统</el-menu-item>
-          <el-menu-item index="/home/fb_crossborder/2">宁波跨境追溯系统</el-menu-item>
+          <el-menu-item index="/home/fb_total">全网追溯系统</el-menu-item>
+          <el-menu-item index="/home/fb_crossborder/1">进出口产品追溯监管系统</el-menu-item>
+          <el-menu-item index="/home/fb_crossborder/2">宁波进口商品溯源系统</el-menu-item>
         </el-submenu>
         <el-submenu index="3">
           <template slot="title"><span class="opened-title">商品召回系统</span></template>
@@ -51,6 +52,10 @@
         } else {
           this.$router.push({path: index})
         }
+      },
+      exitLogin(){
+        window.localStorage.setItem('ts_login_status',0);
+        this.$router.push({path: '/login'})
       }
     },
     computed: {
@@ -99,6 +104,16 @@
 
   .ms-header > .title {
     font-size: 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .ms-header > .title > .exit {
+    font-size: 15px;
+    cursor: pointer;
+    padding-right: 20px;
+    text-decoration: underline;
   }
 
   .ms-sidebar {

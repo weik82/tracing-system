@@ -41,7 +41,6 @@
         this.option.trade = _route.trade;
         this.feedbackType = 'detail';
       }
-
     },
     watch: {
       '$route' (to, from) {
